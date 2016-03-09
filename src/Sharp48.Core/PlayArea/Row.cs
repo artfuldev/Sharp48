@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Sharp48.Core.PlayArea
 {
@@ -7,6 +8,11 @@ namespace Sharp48.Core.PlayArea
     {
         public Row(IList<ISquare> list) : base(list)
         {
+        }
+
+        public override string ToString()
+        {
+            return string.Join(",", this.Select(x => x.ToString()));
         }
     }
 }

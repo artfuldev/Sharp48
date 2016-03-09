@@ -56,5 +56,10 @@ namespace Sharp48.Core.PlayArea
             }
             return grid;
         }
+
+        public override string ToString()
+        {
+            return string.Join("\n", Rows.Select(x => x.ToString()));
+        }
     }
 }
