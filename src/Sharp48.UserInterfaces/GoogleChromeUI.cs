@@ -24,8 +24,8 @@ namespace Sharp48.UserInterfaces
         public void Initialize()
         {
             _driver.Navigate().GoToUrl("https://gabrielecirulli.github.io/2048/");
-            var waiter = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            waiter.Until(d => d.Title == "2048");
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.Title == "2048");
         }
 
         // TODO: Get Grid from UI
