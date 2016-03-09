@@ -1,0 +1,26 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Sharp48.ConsoleApp Console Application",
+  "authors": [ "Kenshin" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "Selenium.Support": "2.51.0",
+    "Selenium.WebDriverBackedSelenium": "2.51.0"
+  },
+
+  "commands": {
+    "Sharp48.ConsoleApp": "Sharp48.ConsoleApp"
+  },
+
+  "frameworks": {
+    "dnx451": { },
+    "net45": { }
+  }
+}
