@@ -7,6 +7,7 @@
   "licenseUrl": "",
 
   "dependencies": {
+    "Newtonsoft.Json": "8.0.2",
     "Sharp48.Core": "",
     "Selenium.Support": "2.51.0",
     "Selenium.WebDriverBackedSelenium": "2.51.0"

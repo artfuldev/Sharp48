@@ -2,7 +2,6 @@
 {
     public enum Move : byte
     {
-        None,
         Up,
         Right,
         Down,

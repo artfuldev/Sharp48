@@ -15,9 +15,9 @@ namespace Sharp48.ConsoleApp
             {
                 ui.Initialize();
                 var grid = ui.GetGrid();
-                var solver = new Solver();
+                var solver = new RandomSolver();
                 var move = solver.GetBestMove(grid);
-                while (move != Move.None)
+                while (move != null)
                 {
                     grid = ui.GetGrid(move);
                     move = solver.GetBestMove(grid);
