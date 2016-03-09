@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using Sharp48.Solvers;
 using Sharp48.UserInterfaces;
+using Sharp48.Core.Moves;
 
 namespace Sharp48.ConsoleApp
 {
@@ -12,6 +14,14 @@ namespace Sharp48.ConsoleApp
             using (var ui = new GoogleChromeUI(driverPath))
             {
                 ui.Initialize();
+                var grid = ui.GetGrid();
+                var solver = new Solver();
+                var move = solver.GetBestMove(grid);
+                while (move != Move.None)
+                {
+                    grid = ui.GetGrid(move);
+                    move = solver.GetBestMove(grid);
+                }
                 Console.ReadLine();
             }
         }
