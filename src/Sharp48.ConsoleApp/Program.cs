@@ -9,9 +9,9 @@ namespace Sharp48.ConsoleApp
         public static void Main(string[] args)
         {
             var driverPath = Path.Combine(Environment.CurrentDirectory);
-            using (var adapter = new GoogleChromeUserInterface(driverPath))
+            using (var ui = new GoogleChromeUI(driverPath))
             {
-                adapter.Initialize();
+                ui.Initialize();
                 Console.ReadLine();
             }
         }

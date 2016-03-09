@@ -8,15 +8,15 @@ using Sharp48.Core.PlayArea;
 
 namespace Sharp48.UserInterfaces
 {
-    public class GoogleChromeUserInterface : IUserInterface
+    public class GoogleChromeUI : IUserInterface
     {
         private readonly IWebDriver _driver;
 
-        public GoogleChromeUserInterface(string driverPath) : this(new ChromeDriver(driverPath, new ChromeOptions()))
+        public GoogleChromeUI(string driverPath) : this(new ChromeDriver(driverPath, new ChromeOptions()))
         {
         }
 
-        private GoogleChromeUserInterface(IWebDriver driver)
+        private GoogleChromeUI(IWebDriver driver)
         {
             _driver = driver;
         }
