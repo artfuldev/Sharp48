@@ -12,7 +12,7 @@ namespace Sharp48.Core.PlayArea
             var columns = new IColumn[4];
             for (var i = 0; i < 4; i++)
             {
-                columnSquares[i] = new ISquare[8].ToList();
+                columnSquares[i] = new ISquare[4].ToList();
                 columns[i] = new Column(columnSquares[i]);
             }
 
@@ -20,7 +20,7 @@ namespace Sharp48.Core.PlayArea
             var rows = new IRow[4];
             for (var i = 0; i < 4; i++)
             {
-                rowSquares[i] = new ISquare[8].ToList();
+                rowSquares[i] = new ISquare[4].ToList();
                 rows[i] = new Row(rowSquares[i]);
             }
 

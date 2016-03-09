@@ -43,13 +43,13 @@ namespace Sharp48.UserInterfaces
         {
             if (move != null)
                 MakeMove(move.Value);
-            var json = _driver.ExecuteJavaScript<string>(@"window.JSON.stringify(GameManager._instance.grid)");
+            var json = _driver.ExecuteJavaScript<string>(@"return JSON.stringify(GameManager._instance.grid)");
             var gameManagerGrid = JsonConvert.DeserializeObject<GameManagerGrid>(json);
+            gameManagerGrid.Cells = gameManagerGrid.Cells.Transpose().ToList();
             var gridString =
                 gameManagerGrid.Cells.Aggregate("",
-                    (current1, row) => row.Aggregate(current1, (current, cell) => current + (cell?.Value + ",")))
-                    .TrimEnd(',');
-            return Grid.ParseGrid(gridString);
+                    (seed, row) => row.Aggregate(seed, (current, cell) => current + cell?.Value + ","));
+            return Grid.ParseGrid(gridString.Remove(gridString.Length - 1));
         }
 
         public void Dispose()
@@ -65,7 +65,7 @@ namespace Sharp48.UserInterfaces
 
         private class GameManagerGrid
         {
-            public List<Cell[]> Cells { get; set; }
+            public List<List<Cell>> Cells { get; set; }
         }
 
         private class Cell
