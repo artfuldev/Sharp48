@@ -13,12 +13,10 @@ namespace Sharp48.ConsoleApp
             var options = new ChromeOptions();
             IWebDriver driver = new ChromeDriver(driverPath, options);
 
-            driver.Navigate().GoToUrl("http://google.com?q=cheese");
+            driver.Navigate().GoToUrl("https://gabrielecirulli.github.io/2048/");
 
-            //Close the browser
             driver.Quit();
 
-            // Wait
             Console.ReadLine();
         }
     }
