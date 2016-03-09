@@ -2,6 +2,6 @@
 {
     public interface ISquare
     {
-         ITile Tile { get; }
+         ITile Tile { get; set; }
     }
 }
