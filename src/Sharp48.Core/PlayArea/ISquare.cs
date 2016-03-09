@@ -1,4 +1,6 @@
-﻿namespace Sharp48.Core.PlayArea
+﻿using Sharp48.Core.Tiles;
+
+namespace Sharp48.Core.PlayArea
 {
     public interface ISquare
     {

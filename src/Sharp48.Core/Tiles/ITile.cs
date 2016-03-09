@@ -1,4 +1,4 @@
-﻿namespace Sharp48.Core.PlayArea
+﻿namespace Sharp48.Core.Tiles
 {
     public interface ITile
     {
