@@ -6,13 +6,17 @@ using OpenQA.Selenium.Support.UI;
 using Sharp48.Core.Moves;
 using Sharp48.Core.PlayArea;
 
-namespace Sharp48.InterfaceAdapter
+namespace Sharp48.UserInterfaces
 {
-    public class Adapter : IAdapter
+    public class GoogleChromeUserInterface : IUserInterface
     {
         private readonly IWebDriver _driver;
-        public Adapter(string driverPath):this(new ChromeDriver(driverPath, new ChromeOptions())) { }
-        public Adapter(IWebDriver driver)
+
+        public GoogleChromeUserInterface(string driverPath) : this(new ChromeDriver(driverPath, new ChromeOptions()))
+        {
+        }
+
+        private GoogleChromeUserInterface(IWebDriver driver)
         {
             _driver = driver;
         }
@@ -34,15 +38,14 @@ namespace Sharp48.InterfaceAdapter
             throw new NotImplementedException();
         }
 
-        // TODO: Make move
-        private void MakeMove(Move move)
-        {
-            
-        }
-
         public void Dispose()
         {
             _driver.Quit();
+        }
+
+        // TODO: Make move
+        private void MakeMove(Move move)
+        {
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using Sharp48.InterfaceAdapter;
+using Sharp48.UserInterfaces;
 
 namespace Sharp48.ConsoleApp
 {
@@ -13,7 +9,7 @@ namespace Sharp48.ConsoleApp
         public static void Main(string[] args)
         {
             var driverPath = Path.Combine(Environment.CurrentDirectory);
-            using (var adapter = new Adapter(driverPath))
+            using (var adapter = new GoogleChromeUserInterface(driverPath))
             {
                 adapter.Initialize();
                 Console.ReadLine();

@@ -28,7 +28,7 @@ namespace Sharp48.Core.PlayArea
             for (var i = 0; i < 4; i++)
                 for (var j = 0; j < 4; j++)
                 {
-                    var squareIndex = i * 4 + j;
+                    var squareIndex = i*4 + j;
                     var square = new Square();
                     squares[squareIndex] = square;
                     rowSquares[i][j] = square;
@@ -48,7 +48,7 @@ namespace Sharp48.Core.PlayArea
         {
             var grid = new Grid();
             var tiles = gridString.Split(',')
-                .Select(x => string.IsNullOrWhiteSpace(x) ? (ITile) null : new Tile() {Value = uint.Parse(x)})
+                .Select(x => string.IsNullOrWhiteSpace(x) ? (ITile) null : new Tile {Value = uint.Parse(x)})
                 .ToArray();
             for (var i = 0; i < tiles.Length; i++)
             {

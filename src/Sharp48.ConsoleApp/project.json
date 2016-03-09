@@ -11,7 +11,7 @@
   },
 
   "dependencies": {
-    "Sharp48.InterfaceAdapter": ""
+    "Sharp48.UserInterfaces": ""
   },
 
   "commands": {
