@@ -7,12 +7,12 @@
   "licenseUrl": "",
 
   "dependencies": {
+    "Sharp48.Core": "",
     "Selenium.Support": "2.51.0",
     "Selenium.WebDriverBackedSelenium": "2.51.0"
   },
 
   "frameworks": {
-    "dnx451": { },
-    "net45": { }
+    "net451": { }
   }
 }
