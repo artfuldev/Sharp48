@@ -1,4 +1,5 @@
 ﻿using System;
+using Sharp48.ConsoleApp.Logging;
 using Sharp48.Solvers;
 using Sharp48.UserInterfaces;
 
@@ -8,11 +9,13 @@ namespace Sharp48.ConsoleApp
     {
         private readonly ISolver _solver;
         private readonly IUserInterface _ui;
+        private readonly ILogger _logger;
 
-        public GameRunner(IUserInterface ui, ISolver solver)
+        public GameRunner(IUserInterface ui, ISolver solver, ILogger logger)
         {
             _ui = ui;
             _solver = solver;
+            _logger = logger;
         }
 
         public void Dispose()
@@ -28,6 +31,7 @@ namespace Sharp48.ConsoleApp
             {
                 var move = _solver.GetBestMove(game);
                 game = _ui.MakeMove(move);
+                _logger.Log(game.Score);
             }
         }
     }
