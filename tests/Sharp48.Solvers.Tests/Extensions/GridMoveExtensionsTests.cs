@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Sharp48.Core.PlayArea;
 using Sharp48.Solvers.Extensions;
 using Xunit;
@@ -17,6 +18,28 @@ namespace Sharp48.Solvers.Tests.Extensions
             // Act
             var possibleMoves = grid.GetPossibleMoves();
             var actual = string.Join(",", possibleMoves);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("4,16,8,4,32,64,4,2,2,8,2,2,2,4,2,",
+            "4,16,8,4,32,64,4,2,2,8,2,2,2,4,2,2|4,16,8,4,32,64,4,2,2,8,2,2,2,4,2,4")]
+        [InlineData("4,16,8,4,32,,4,2,2,8,2,2,2,4,2,",
+            "4,16,8,4,32,2,4,2,2,8,2,2,2,4,2, |4,16,8,4,32,4,4,2,2,8,2,2,2,4,2, |4,16,8,4,32, ,4,2,2,8,2,2,2,4,2,2|4,16,8,4,32, ,4,2,2,8,2,2,2,4,2,4")]
+        public void GetGenerationsWorks(string input, string expected)
+        {
+            // Arrange
+            var grid = Grid.Parse(input);
+            expected = string.Join("|", expected.Split('|').OrderBy(x => x));
+
+            // Act
+            var generations =
+                grid.GetPossibleGenerations()
+                    .Select(x => x.ToString().Replace(Environment.NewLine, ","))
+                    .OrderBy(x => x).ToList();
+            var actual = string.Join("|", generations);
 
             // Assert
             Assert.Equal(expected, actual);
