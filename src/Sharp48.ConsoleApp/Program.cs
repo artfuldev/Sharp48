@@ -10,10 +10,11 @@ namespace Sharp48.ConsoleApp
     public class Program
     {
         private static readonly ISolver Solver = new RandomSolver();
+        private static IUserInterface GetUI() => new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
+
         public static void Main(string[] args)
         {
-            var driverPath = Path.Combine(Environment.CurrentDirectory);
-            using (var ui = new GoogleChromeUI(driverPath))
+            using (var ui = GetUI())
             {
                 ui.Initialize();
                 var game = ui.Game;
