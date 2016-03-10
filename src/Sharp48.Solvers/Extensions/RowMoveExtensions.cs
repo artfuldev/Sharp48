@@ -16,18 +16,18 @@ namespace Sharp48.Solvers.Extensions
                 yield return Move.Left;
         }
 
-        public static IEnumerable<ISquare> MakeMove(this IRow row, Move move, out uint score)
+        public static IRow MakeMove(this IRow row, Move move, out uint score)
         {
             switch (move)
             {
                 case Move.Up:
                 case Move.Down:
                     score = 0;
-                    return Enumerable.Empty<ISquare>();
+                    return new Row(new List<ISquare>());
                 case Move.Right:
-                    return row.MoveRight(out score);
+                    return new Row(row.MoveRight(out score).ToList());
                 case Move.Left:
-                    return row.Reverse().MoveRight(out score);
+                    return new Row(row.Reverse().MoveRight(out score).Reverse().ToList());
                 default:
                     throw new ArgumentOutOfRangeException(nameof(move), move, null);
             }
