@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
+using Sharp48.Core;
 using Sharp48.Core.Moves;
 using Sharp48.Core.PlayArea;
 
@@ -39,7 +40,7 @@ namespace Sharp48.UserInterfaces
             _driver.ExecuteJavaScript<string>(@"GameManager.prototype.isGameTerminated = window._func_tmp;");
         }
 
-        public IGrid Grid
+        public IGame Game
         {
             get
             {
@@ -49,16 +50,17 @@ namespace Sharp48.UserInterfaces
                 var gridString =
                     gameManagerGrid.Cells.Aggregate("",
                         (seed, row) => row.Aggregate(seed, (current, cell) => current + cell?.Value + ","));
-                var grid = Core.PlayArea.Grid.ParseGrid(gridString.Remove(gridString.Length - 1));
-                grid.GameOver = _driver.ExecuteJavaScript<bool>(@"return GameManager._instance.over");
-                return grid;
+                var grid = Grid.ParseGrid(gridString.Remove(gridString.Length - 1));
+                var gameOver = _driver.ExecuteJavaScript<bool>(@"return GameManager._instance.over");
+                var score = _driver.ExecuteJavaScript<double>(@"return GameManager._instance.score");
+                return new Game(grid, gameOver, score);
             }
         }
 
-        public IGrid MakeMove(Move move)
+        public IGame MakeMove(Move move)
         {
             _driver.ExecuteJavaScript<string>($"GameManager._instance.move({(byte) move})");
-            return Grid;
+            return Game;
         }
 
         public void Dispose()
