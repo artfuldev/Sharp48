@@ -50,7 +50,7 @@ namespace Sharp48.UserInterfaces
                 var gridString =
                     gameManagerGrid.Cells.Aggregate("",
                         (seed, row) => row.Aggregate(seed, (current, cell) => current + cell?.Value + ","));
-                var grid = Grid.ParseGrid(gridString.Remove(gridString.Length - 1));
+                var grid = Grid.Parse(gridString.Remove(gridString.Length - 1));
                 var gameOver = _driver.ExecuteJavaScript<bool>(@"return GameManager._instance.over");
                 var score = _driver.ExecuteJavaScript<long>(@"return GameManager._instance.score");
                 return new Game(grid, gameOver, score);

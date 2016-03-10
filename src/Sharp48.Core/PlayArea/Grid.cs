@@ -45,7 +45,7 @@ namespace Sharp48.Core.PlayArea
         public IReadOnlyCollection<IRow> Rows { get; }
         public IReadOnlyCollection<IColumn> Columns { get; }
 
-        public static Grid ParseGrid(string gridString)
+        public static Grid Parse(string gridString)
         {
             var grid = new Grid();
             var tiles = gridString.Split(',')
