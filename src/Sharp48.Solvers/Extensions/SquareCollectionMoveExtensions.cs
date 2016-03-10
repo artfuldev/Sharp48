@@ -38,7 +38,7 @@ namespace Sharp48.Solvers.Extensions
 
         public static IEnumerable<ISquare> MoveRight(this IEnumerable<ISquare> squares, out uint score)
         {
-            return squares.SlideRight().MergeRight(out score);
+            return squares.SlideRight().MergeRight(out score).SlideRight();
         } 
     }
 }
