@@ -10,18 +10,15 @@ namespace Sharp48.Solvers
 {
     public class IntelligentSolver : ISolver
     {
-        private readonly byte _depth;
         private readonly IDictionary<string, double> _hashTable = new Dictionary<string, double>();
-
-        public IntelligentSolver(byte depth)
-        {
-            _depth = depth;
-        }
 
         public Move GetBestMove(IGame game)
         {
+            var n = 2*Math.Log10(game.Grid.Squares.Max(x => x.GetSafeTileValue()))/Math.Log10(2);
+            var depth = Convert.ToByte(n > 4 ? 4 : n);
             var possibleMoves = game.GetPossibleMoves();
-            var movesToScoreDictionary = possibleMoves.ToDictionary(x => x, x => ExpectiMaxScore(game.MakeMove(x), (byte)(_depth * 2)));
+            var movesToScoreDictionary = possibleMoves.ToDictionary(x => x,
+                x => ExpectiMaxScore(game.MakeMove(x), depth));
             var bestScore = movesToScoreDictionary.Max(x => x.Value);
             return movesToScoreDictionary.First(x => Math.Abs(x.Value - bestScore) < 0.1).Key;
         }
@@ -38,9 +35,6 @@ namespace Sharp48.Solvers
         {
             if (game.Over || depth == 0)
                 return Score(game);
-            var key = game.Grid.ToString();
-            if (_hashTable.ContainsKey(key))
-                return _hashTable[key];
             double alpha;
             // Random event at node
             if (depth%2 == 0)
