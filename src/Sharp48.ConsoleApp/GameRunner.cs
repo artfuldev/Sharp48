@@ -15,6 +15,11 @@ namespace Sharp48.ConsoleApp
             _solver = solver;
         }
 
+        public void Dispose()
+        {
+            _ui.Dispose();
+        }
+
         public void Run()
         {
             _ui.Initialize();
@@ -24,11 +29,6 @@ namespace Sharp48.ConsoleApp
                 var move = _solver.GetBestMove(game);
                 game = _ui.MakeMove(move);
             }
-        }
-
-        public void Dispose()
-        {
-            _ui.Dispose();
         }
     }
 }

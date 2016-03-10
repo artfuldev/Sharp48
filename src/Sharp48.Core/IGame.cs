@@ -6,6 +6,6 @@ namespace Sharp48.Core
     {
         IGrid Grid { get; }
         bool Over { get; }
-        long Score { get; } 
+        long Score { get; }
     }
 }
