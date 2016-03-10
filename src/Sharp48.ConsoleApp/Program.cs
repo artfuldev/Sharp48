@@ -16,11 +16,11 @@ namespace Sharp48.ConsoleApp
             using (var ui = new GoogleChromeUI(driverPath))
             {
                 ui.Initialize();
-                var grid = ui.Grid;
-                while (!grid.GameOver)
+                var game = ui.Game;
+                while (!game.Over)
                 {
-                    var move = Solver.GetBestMove(grid);
-                    grid = ui.MakeMove(move);
+                    var move = Solver.GetBestMove(game);
+                    game = ui.MakeMove(move);
                 }
                 Console.ReadLine();
             }

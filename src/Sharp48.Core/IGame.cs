@@ -5,7 +5,7 @@ namespace Sharp48.Core
     public interface IGame
     {
         IGrid Grid { get; }
-        bool GameOver { get; }
-        double Score { get; } 
+        bool Over { get; }
+        long Score { get; } 
     }
 }

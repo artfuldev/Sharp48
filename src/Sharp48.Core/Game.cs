@@ -4,15 +4,15 @@ namespace Sharp48.Core
 {
     public class Game : IGame
     {
-        public Game(IGrid grid, bool gameOver, double score)
+        public Game(IGrid grid, bool over, long score)
         {
             Grid = grid;
-            GameOver = gameOver;
+            Over = over;
             Score = score;
         }
 
         public IGrid Grid { get; }
-        public bool GameOver { get; }
-        public double Score { get; }
+        public bool Over { get; }
+        public long Score { get; }
     }
 }
