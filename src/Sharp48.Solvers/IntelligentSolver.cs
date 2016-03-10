@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sharp48.Core;
 using Sharp48.Core.Moves;
+using Sharp48.Solvers.Evaluators;
 using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers
@@ -11,6 +12,7 @@ namespace Sharp48.Solvers
     public class IntelligentSolver : ISolver
     {
         private readonly IDictionary<string, double> _hashTable = new Dictionary<string, double>();
+        private readonly IEvaluator _evaluator = new ScoreEvaluator();
 
         public Move GetBestMove(IGame game)
         {
@@ -27,7 +29,7 @@ namespace Sharp48.Solvers
         {
             var key = game.Grid.ToString();
             if (!_hashTable.ContainsKey(key))
-                _hashTable[key] = game.Score;
+                _hashTable[key] = _evaluator.Evaluate(game);
             return _hashTable[key];
         }
 
