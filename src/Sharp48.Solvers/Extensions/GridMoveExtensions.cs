@@ -9,11 +9,10 @@ namespace Sharp48.Solvers.Extensions
     internal static class GridMoveExtensions
     {
         public static IEnumerable<Move> GetPossibleMoves(this IGrid grid)
-        {
-            return grid.Rows.SelectMany(x => x.GetPossibleMoves())
+            => grid.Rows.SelectMany(x => x.GetPossibleMoves())
                 .Concat(grid.Columns.SelectMany(x => x.GetPossibleMoves()))
-                .Distinct();
-        }
+                .Distinct()
+                .OrderBy(x => x);
 
         public static IEnumerable<IGrid> GetPossibleGenerations(this IGrid grid)
         {
