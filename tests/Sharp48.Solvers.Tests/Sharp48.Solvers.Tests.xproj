@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>b7ab1c7f-1549-44d3-8159-29ff4cbba493</ProjectGuid>
-    <RootNamespace>Sharp48.Core.Tests</RootNamespace>
+    <ProjectGuid>7b197aa5-826e-467a-93b2-ea807f90fde3</ProjectGuid>
+    <RootNamespace>Sharp48.Solvers.Tests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
   </PropertyGroup>
