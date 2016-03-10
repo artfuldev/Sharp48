@@ -9,22 +9,15 @@ namespace Sharp48.ConsoleApp
 {
     public class Program
     {
-        private static readonly ISolver Solver = new RandomSolver();
-        private static IUserInterface GetUI() => new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
-
         public static void Main(string[] args)
         {
-            using (var ui = GetUI())
-            {
-                ui.Initialize();
-                var game = ui.Game;
-                while (!game.Over)
-                {
-                    var move = Solver.GetBestMove(game);
-                    game = ui.MakeMove(move);
-                }
-                Console.ReadLine();
-            }
+            var driverPath = Path.Combine(Environment.CurrentDirectory);
+            var ui = new GoogleChromeUI(driverPath);
+            var solver = new RandomSolver();
+            using (var runner = new GameRunner(ui,solver))
+                runner.Run();
+            Console.WriteLine("Game Over");
+            Console.ReadLine();
         }
     }
 }
