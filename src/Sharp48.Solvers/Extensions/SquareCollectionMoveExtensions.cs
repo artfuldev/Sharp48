@@ -52,7 +52,19 @@ namespace Sharp48.Solvers.Extensions
         public static IEnumerable<ISquare> MergeRight(this IEnumerable<ISquare> squares, out uint score)
         {
             score = 0;
-            return Enumerable.Empty<ISquare>();
+            var source = squares.Select(x => x.GetSafeTileValue()).ToArray();
+            for (var i = source.Length - 1; i > 0; i--)
+            {
+                var number = source[i];
+                if (number == 0)
+                    continue;
+                var numberToTheLeft = source[i - 1];
+                if (numberToTheLeft != number)
+                    continue;
+                source[i] = 2*number;
+                source[i - 1] = 0;
+            }
+            return source.Select(x => new Square() { Tile = x == 0 ? null : new Tile() { Value = x } });
         }
 
         public static IEnumerable<ISquare> MoveRight(this IEnumerable<ISquare> squares, out uint score)

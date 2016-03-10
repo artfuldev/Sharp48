@@ -86,5 +86,25 @@ namespace Sharp48.Solvers.Tests.Extensions
 
         }
 
+        [Theory]
+        [InlineData("2,,,", "2, , , ")]
+        [InlineData("2,2,,", " ,4, , ")]
+        [InlineData("2,,,2", "2, , ,2")]
+        [InlineData("2,2,,2", " ,4, ,2")]
+        [InlineData(",,,2", " , , ,2")]
+        [InlineData(",,4,2", " , ,4,2")]
+        public void MergeRightWorks(string input, string expected)
+        {
+            // Arrange
+            var squares = Column.Parse(input);
+            uint score;
+
+            // Act
+            var slided = new Column(squares.MergeRight(out score).ToList());
+            var actual = slided.ToString();
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
