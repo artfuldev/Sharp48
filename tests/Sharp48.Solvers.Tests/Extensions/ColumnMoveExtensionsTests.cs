@@ -65,5 +65,26 @@ namespace Sharp48.Solvers.Tests.Extensions
             Assert.Equal(exists, actual);
         }
 
+        [Theory]
+        [InlineData("2,,,", " , , ,2")]
+        [InlineData("2,2,,", " , ,2,2")]
+        [InlineData("2,,,2", " , ,2,2")]
+        [InlineData("2,2,,2", " ,2,2,2")]
+        [InlineData(",,,2", " , , ,2")]
+        [InlineData(",,4,2", " , ,4,2")]
+        public void SlideRightWorks(string input, string expected)
+        {
+            // Arrange
+            var squares = Column.Parse(input);
+
+            // Act
+            var slided = new Column(squares.SlideRight().ToList());
+            var actual = slided.ToString();
+
+            // Assert
+            Assert.Equal(expected, actual);
+
+        }
+
     }
 }

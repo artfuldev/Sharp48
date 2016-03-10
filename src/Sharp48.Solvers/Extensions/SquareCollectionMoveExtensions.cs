@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Sharp48.Core.PlayArea;
+using Sharp48.Core.Tiles;
 
 namespace Sharp48.Solvers.Extensions
 {
@@ -25,12 +26,30 @@ namespace Sharp48.Solvers.Extensions
             return false;
         }
 
-        private static IEnumerable<ISquare> SlideRight(this IEnumerable<ISquare> squares)
+        public static IEnumerable<ISquare> SlideRight(this IEnumerable<ISquare> squares)
         {
-            return Enumerable.Empty<ISquare>();
+            var source = squares.Select(x => x.GetSafeTileValue()).ToArray();
+            for (var i = source.Length - 1; i > 0; i--)
+            {
+                var number = source[i];
+                var leftIndex = i - 1;
+                var numberToTheLeft = source[leftIndex];
+                if (number != 0)
+                    continue;
+                while (numberToTheLeft == 0 && leftIndex > 0)
+                {
+                    leftIndex--;
+                    numberToTheLeft = source[leftIndex];
+                }
+                if (numberToTheLeft == 0)
+                    continue;
+                source[i] = numberToTheLeft;
+                source[leftIndex] = 0;
+            }
+            return source.Select(x => new Square() {Tile = x == 0 ? null : new Tile() {Value = x}});
         }
 
-        private static IEnumerable<ISquare> MergeRight(this IEnumerable<ISquare> squares, out uint score)
+        public static IEnumerable<ISquare> MergeRight(this IEnumerable<ISquare> squares, out uint score)
         {
             score = 0;
             return Enumerable.Empty<ISquare>();
