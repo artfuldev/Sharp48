@@ -61,8 +61,9 @@ namespace Sharp48.Solvers.Extensions
                 var numberToTheLeft = source[i - 1];
                 if (numberToTheLeft != number)
                     continue;
-                source[i] = 2*number;
+                source[i] = 2 * number;
                 source[i - 1] = 0;
+                score += source[i];
             }
             return source.Select(x => new Square() { Tile = x == 0 ? null : new Tile() { Value = x } });
         }
