@@ -31,5 +31,46 @@ namespace Sharp48.Solvers.Extensions
                     yield return Grid.Parse(string.Join(",", squaresCopy4));
                 }
         }
+
+        public static IGrid MakeMove(this IGrid grid, Move move, out uint score)
+        {
+            var squares = new ISquare[4][];
+            for (var i = 0; i < 4; i++)
+                squares[i] = new ISquare[4];
+            score = 0;
+            switch (move)
+            {
+                case Move.Up:
+                case Move.Down:
+                    for (var i = 0; i < 4; i++)
+                    {
+                        uint localScore;
+                        var localSquares = grid.Columns.ElementAt(i).MakeMove(move, out localScore).ToArray();
+                        score += localScore;
+                        for (var j = 0; j < 4; j++)
+                            squares[j][i] = localSquares[j];
+                    }
+                    break;
+                case Move.Right:
+                case Move.Left:
+                    for (var i=0;i<4;i++)
+                    {
+                        uint localScore;
+                        var localSquares = grid.Rows.ElementAt(i).MakeMove(move, out localScore).ToArray();
+                        score += localScore;
+                        for (var j = 0; j < 4; j++)
+                            squares[i][j] = localSquares[j];
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(move), move, null);
+            }
+            var newSquares = new ISquare[16];
+            for(var i=0;i<4;i++)
+                for (var j = 0; j < 4; j++)
+                    newSquares[i*4 + j] = squares[i][j];
+            var gridString = string.Join(",", newSquares.ToList());
+            return Grid.Parse(gridString);
+        }
     }
 }

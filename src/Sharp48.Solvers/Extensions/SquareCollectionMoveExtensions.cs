@@ -24,5 +24,21 @@ namespace Sharp48.Solvers.Extensions
             }
             return false;
         }
+
+        private static IEnumerable<ISquare> SlideRight(this IEnumerable<ISquare> squares)
+        {
+            return Enumerable.Empty<ISquare>();
+        }
+
+        private static IEnumerable<ISquare> MergeRight(this IEnumerable<ISquare> squares, out uint score)
+        {
+            score = 0;
+            return Enumerable.Empty<ISquare>();
+        }
+
+        public static IEnumerable<ISquare> MoveRight(this IEnumerable<ISquare> squares, out uint score)
+        {
+            return squares.SlideRight().MergeRight(out score);
+        } 
     }
 }
