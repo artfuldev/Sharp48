@@ -18,6 +18,10 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sharp48.UserInterfaces", "s
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sharp48.Solvers", "src\Sharp48.Solvers\Sharp48.Solvers.xproj", "{3DE6F17C-ED2D-44F7-B7DB-1C49E951F08A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{774F2DBE-BDB7-4A86-B3E3-CE581DDD6763}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sharp48.Core.Tests", "tests\Sharp48.Core.Tests\Sharp48.Core.Tests.xproj", "{B7AB1C7F-1549-44D3-8159-29FF4CBBA493}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,10 @@ Global
 		{3DE6F17C-ED2D-44F7-B7DB-1C49E951F08A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DE6F17C-ED2D-44F7-B7DB-1C49E951F08A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DE6F17C-ED2D-44F7-B7DB-1C49E951F08A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7AB1C7F-1549-44D3-8159-29FF4CBBA493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7AB1C7F-1549-44D3-8159-29FF4CBBA493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7AB1C7F-1549-44D3-8159-29FF4CBBA493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7AB1C7F-1549-44D3-8159-29FF4CBBA493}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +57,7 @@ Global
 		{1083FA8C-F907-4934-A9D7-336E33FBB1F3} = {2AAF29DE-D61F-44FC-ACB1-0C11B3196DEE}
 		{DEB7A34D-8F7F-4E01-864F-E6BA171B59F8} = {2AAF29DE-D61F-44FC-ACB1-0C11B3196DEE}
 		{3DE6F17C-ED2D-44F7-B7DB-1C49E951F08A} = {2AAF29DE-D61F-44FC-ACB1-0C11B3196DEE}
+		{B7AB1C7F-1549-44D3-8159-29FF4CBBA493} = {774F2DBE-BDB7-4A86-B3E3-CE581DDD6763}
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = 46443e00-4047-466a-8baa-734309e8cb38
