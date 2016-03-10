@@ -44,7 +44,6 @@ namespace Sharp48.Core.PlayArea
         public IReadOnlyCollection<ISquare> Squares { get; }
         public IReadOnlyCollection<IRow> Rows { get; }
         public IReadOnlyCollection<IColumn> Columns { get; }
-        public bool GameOver { get; set; }
 
         public static Grid ParseGrid(string gridString)
         {
