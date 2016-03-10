@@ -13,7 +13,7 @@ namespace Sharp48.ConsoleApp
             var driverPath = Path.Combine(Environment.CurrentDirectory);
             var ui = new GoogleChromeUI(driverPath);
             var logger = new ConsoleLogger();
-            var solver = new RandomSolver();
+            var solver = new IntelligentSolver(2);
             using (var runner = new GameRunner(ui, solver, logger))
                 runner.Run();
             Console.WriteLine("Game Over");
