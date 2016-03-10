@@ -7,9 +7,9 @@ namespace Sharp48.ConsoleApp
 {
     public class GameRunner : IDisposable
     {
+        private readonly ILogger _logger;
         private readonly ISolver _solver;
         private readonly IUserInterface _ui;
-        private readonly ILogger _logger;
 
         public GameRunner(IUserInterface ui, ISolver solver, ILogger logger)
         {

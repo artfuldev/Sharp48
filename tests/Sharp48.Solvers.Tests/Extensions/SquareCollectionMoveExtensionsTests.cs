@@ -7,7 +7,6 @@ namespace Sharp48.Solvers.Tests.Extensions
 {
     public class SquareCollectionMoveExtensionsTests
     {
-
         [Theory]
         [InlineData("2,,,", true)]
         [InlineData("2,2,,", true)]
@@ -45,7 +44,6 @@ namespace Sharp48.Solvers.Tests.Extensions
 
             // Assert
             Assert.Equal(expected, actual);
-
         }
 
         [Theory]

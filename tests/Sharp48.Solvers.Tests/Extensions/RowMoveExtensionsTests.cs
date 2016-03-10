@@ -8,7 +8,6 @@ namespace Sharp48.Solvers.Tests.Extensions
 {
     public class RowMoveExtensionsTests
     {
-
         [Theory]
         [InlineData("2,,,", true)]
         [InlineData("2,2,,", true)]

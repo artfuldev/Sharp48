@@ -2,26 +2,16 @@
 using System.Linq;
 using Sharp48.Core;
 using Sharp48.Core.Moves;
-using Sharp48.Core.PlayArea;
 
 namespace Sharp48.Solvers.Extensions
 {
     internal static class GameMoveExtensions
     {
-        public static IEnumerable<Move> GetPossibleMoves(this IGame game)
-        {
-            return game.Grid.GetPossibleMoves();
-        }
+        public static IEnumerable<Move> GetPossibleMoves(this IGame game) => game.Grid.GetPossibleMoves();
 
         public static IEnumerable<IGame> GetPossibleGenerations(this IGame game)
-        {
-            return game.Grid.GetPossibleGenerations().Select(grid =>
-            {
-                var over = !grid.GetPossibleMoves().Any();
-                var score = game.Score;
-                return new Game(grid, over, score);
-            });
-        }
+            => game.Grid.GetPossibleGenerations()
+                .Select(grid => new Game(grid, !grid.GetPossibleMoves().Any(), game.Score));
 
         public static IGame MakeMove(this IGame game, Move move)
         {

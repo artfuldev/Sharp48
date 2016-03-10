@@ -10,11 +10,12 @@ namespace Sharp48.Core.PlayArea
         public Column(IList<ISquare> list) : base(list)
         {
         }
+
         public static Column Parse(string input)
         {
-            var squares = Enumerable.Range(1, 4).Select(x => (ISquare)new Square()).ToList();
+            var squares = Enumerable.Range(1, 4).Select(x => (ISquare) new Square()).ToList();
             var tiles = input.Split(',')
-                .Select(x => string.IsNullOrWhiteSpace(x) ? (ITile)null : new Tile { Value = uint.Parse(x) })
+                .Select(x => string.IsNullOrWhiteSpace(x) ? (ITile) null : new Tile {Value = uint.Parse(x)})
                 .ToArray();
             for (var i = 0; i < tiles.Length; i++)
             {

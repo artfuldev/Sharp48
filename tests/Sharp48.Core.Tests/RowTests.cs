@@ -6,7 +6,7 @@ namespace Sharp48.Core.Tests
     public class RowTests
     {
         [Theory]
-        [InlineData("2,,,","2, , , ")]
+        [InlineData("2,,,", "2, , , ")]
         public void ParsingWorks(string input, string expected)
         {
             // Arrange

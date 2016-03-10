@@ -26,4 +26,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("3de6f17c-ed2d-44f7-b7db-1c49e951f08a")]
 
 // For Unit Tests
-[assembly:InternalsVisibleTo("Sharp48.Solvers.Tests")]
+
+[assembly: InternalsVisibleTo("Sharp48.Solvers.Tests")]

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sharp48.Core;
 using Sharp48.Core.Moves;
 using Sharp48.Core.PlayArea;
 
@@ -20,7 +19,7 @@ namespace Sharp48.Solvers.Extensions
         {
             var gridString = grid.ToString();
             var squares = gridString.Split(new[] {Environment.NewLine, ","}, StringSplitOptions.None);
-            for(var i=0;i<16;i++)
+            for (var i = 0; i < 16; i++)
                 if (string.IsNullOrWhiteSpace(squares[i]))
                 {
                     var squaresCopy2 = squares.Select(x => x).ToArray();
@@ -53,7 +52,7 @@ namespace Sharp48.Solvers.Extensions
                     break;
                 case Move.Right:
                 case Move.Left:
-                    for (var i=0;i<4;i++)
+                    for (var i = 0; i < 4; i++)
                     {
                         uint localScore;
                         var localSquares = grid.Rows.ElementAt(i).MakeMove(move, out localScore).ToArray();
@@ -66,7 +65,7 @@ namespace Sharp48.Solvers.Extensions
                     throw new ArgumentOutOfRangeException(nameof(move), move, null);
             }
             var newSquares = new ISquare[16];
-            for(var i=0;i<4;i++)
+            for (var i = 0; i < 4; i++)
                 for (var j = 0; j < 4; j++)
                     newSquares[i*4 + j] = squares[i][j];
             var gridString = string.Join(",", newSquares.ToList());
