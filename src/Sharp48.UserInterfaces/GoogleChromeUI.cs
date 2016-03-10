@@ -39,28 +39,31 @@ namespace Sharp48.UserInterfaces
             _driver.ExecuteJavaScript<string>(@"GameManager.prototype.isGameTerminated = window._func_tmp;");
         }
 
-        public IGrid GetGrid(Move? move = null)
+        public IGrid Grid
         {
-            if (move != null)
-                MakeMove(move.Value);
-            var json = _driver.ExecuteJavaScript<string>(@"return JSON.stringify(GameManager._instance.grid)");
-            var gameManagerGrid = JsonConvert.DeserializeObject<GameManagerGrid>(json);
-            gameManagerGrid.Cells = gameManagerGrid.Cells.Transpose().ToList();
-            var gridString =
-                gameManagerGrid.Cells.Aggregate("",
-                    (seed, row) => row.Aggregate(seed, (current, cell) => current + cell?.Value + ","));
-            return Grid.ParseGrid(gridString.Remove(gridString.Length - 1));
+            get
+            {
+                var json = _driver.ExecuteJavaScript<string>(@"return JSON.stringify(GameManager._instance.grid)");
+                var gameManagerGrid = JsonConvert.DeserializeObject<GameManagerGrid>(json);
+                gameManagerGrid.Cells = gameManagerGrid.Cells.Transpose().ToList();
+                var gridString =
+                    gameManagerGrid.Cells.Aggregate("",
+                        (seed, row) => row.Aggregate(seed, (current, cell) => current + cell?.Value + ","));
+                var grid = Core.PlayArea.Grid.ParseGrid(gridString.Remove(gridString.Length - 1));
+                grid.GameOver = _driver.ExecuteJavaScript<bool>(@"return GameManager._instance.over");
+                return grid;
+            }
+        }
+
+        public IGrid MakeMove(Move move)
+        {
+            _driver.ExecuteJavaScript<string>($"GameManager._instance.move({(byte) move})");
+            return Grid;
         }
 
         public void Dispose()
         {
             _driver.Quit();
-        }
-
-        // TODO: Make move
-        private void MakeMove(Move move)
-        {
-            _driver.ExecuteJavaScript<string>($"GameManager._instance.move({((byte) move)})");
         }
 
         private class GameManagerGrid

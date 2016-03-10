@@ -7,6 +7,7 @@ namespace Sharp48.UserInterfaces
     public interface IUserInterface : IDisposable
     {
         void Initialize();
-        IGrid GetGrid(Move? move = null);
+        IGrid Grid { get; }
+        IGrid MakeMove(Move move);
     }
 }

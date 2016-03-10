@@ -5,6 +5,6 @@ namespace Sharp48.Solvers
 {
     public interface ISolver
     {
-        Move? GetBestMove(IGrid grid);
+        Move GetBestMove(IGrid grid);
     }
 }

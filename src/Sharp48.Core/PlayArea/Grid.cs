@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sharp48.Core.Tiles;
 
@@ -43,8 +44,9 @@ namespace Sharp48.Core.PlayArea
         public IReadOnlyCollection<ISquare> Squares { get; }
         public IReadOnlyCollection<IRow> Rows { get; }
         public IReadOnlyCollection<IColumn> Columns { get; }
+        public bool GameOver { get; set; }
 
-        public static IGrid ParseGrid(string gridString)
+        public static Grid ParseGrid(string gridString)
         {
             var grid = new Grid();
             var tiles = gridString.Split(',')
@@ -60,7 +62,7 @@ namespace Sharp48.Core.PlayArea
 
         public override string ToString()
         {
-            return string.Join("\n", Rows.Select(x => x.ToString()));
+            return string.Join(Environment.NewLine, Rows.Select(x => x.ToString()));
         }
     }
 }
