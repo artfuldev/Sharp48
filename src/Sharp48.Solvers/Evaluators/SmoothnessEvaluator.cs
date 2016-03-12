@@ -18,8 +18,13 @@ namespace Sharp48.Solvers.Evaluators
             if (_squaresScores.ContainsKey(key))
                 return _squaresScores[key];
             var score = 0d;
-            for (var i = 1; i < array.Length - 1; i++)
-                score -= Math.Abs(array[i - 1] - array[i]) + Math.Abs(array[i + 1] - array[i]);
+            for (var i = 0; i < array.Length - 1; i++)
+            {
+                if (i != 0)
+                    score -= Math.Abs(array[i - 1] - array[i]);
+                if (i != array.Length - 1)
+                    score -= Math.Abs(array[i + 1] - array[i]);
+            }
             return _squaresScores[key] = score;
         }
 
