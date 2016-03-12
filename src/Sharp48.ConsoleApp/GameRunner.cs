@@ -29,10 +29,10 @@ namespace Sharp48.ConsoleApp
             var game = _ui.Game;
             while (!game.Over)
             {
-                var move = _solver.GetBestMove(game);
-                game = _ui.MakeMove(move);
+                game = _ui.MakeMove(_solver.GetBestMove(game));
                 _logger.Log(game.Score);
             }
+            Console.ReadLine();
         }
     }
 }
