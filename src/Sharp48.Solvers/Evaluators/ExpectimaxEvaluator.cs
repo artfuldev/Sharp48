@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Sharp48.Core;
 using Sharp48.Solvers.Extensions;
 
@@ -6,7 +7,12 @@ namespace Sharp48.Solvers.Evaluators
 {
     public class ExpectimaxEvaluator : IEvaluator
     {
-        private readonly IEvaluator _evaluator = new CachingEvaluator(new ScoreEvaluator());
+        private readonly IEvaluator _evaluator;
+
+        public ExpectimaxEvaluator(IEvaluator evaluator)
+        {
+            _evaluator = evaluator;
+        }
 
         public double Evaluate(IGame game) => ExpectiMaxScore(game, CalculateDepth(game));
 

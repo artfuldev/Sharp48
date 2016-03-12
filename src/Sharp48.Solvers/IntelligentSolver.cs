@@ -9,7 +9,12 @@ namespace Sharp48.Solvers
 {
     public class IntelligentSolver : ISolver
     {
-        private readonly IEvaluator _evaluator = new ExpectimaxEvaluator();
+        private readonly IEvaluator _evaluator;
+
+        public IntelligentSolver(IEvaluator evaluator)
+        {
+            _evaluator = evaluator;
+        }
 
         public Move GetBestMove(IGame game)
         {
