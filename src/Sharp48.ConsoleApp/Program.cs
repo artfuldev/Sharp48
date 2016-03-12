@@ -15,7 +15,7 @@ namespace Sharp48.ConsoleApp
             var driverPath = Path.Combine(Environment.CurrentDirectory);
             var ui = new GoogleChromeUI(driverPath);
             var logger = new NullLogger();
-            var evaluators = new List<IEvaluator>() {new ScoreEvaluator(), new SmoothnessEvaluator()};
+            var evaluators = new List<IEvaluator>() {new ScoreEvaluator(), new SmoothnessEvaluator(), new FreeSpaceEvaluator()};
             var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)));
             var solver = new IntelligentSolver(mainEvaluator);
             using (var runner = new GameRunner(ui, solver, logger))

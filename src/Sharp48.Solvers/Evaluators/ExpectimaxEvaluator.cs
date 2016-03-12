@@ -37,6 +37,6 @@ namespace Sharp48.Solvers.Evaluators
             return alpha;
         }
 
-        private static byte CalculateDepth(IGame game) => 2;
+        private static byte CalculateDepth(IGame game) => 4;
     }
 }
