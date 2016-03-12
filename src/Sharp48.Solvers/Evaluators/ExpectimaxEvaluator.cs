@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Sharp48.Core;
 using Sharp48.Solvers.Extensions;
 
@@ -7,23 +6,14 @@ namespace Sharp48.Solvers.Evaluators
 {
     public class ExpectimaxEvaluator : IEvaluator
     {
-        private readonly IEvaluator _evaluator = new ScoreEvaluator();
-        private readonly IDictionary<string, double> _hashTable = new Dictionary<string, double>();
+        private readonly IEvaluator _evaluator = new CachingEvaluator(new ScoreEvaluator());
 
         public double Evaluate(IGame game) => ExpectiMaxScore(game, CalculateDepth(game));
-
-        private double Score(IGame game)
-        {
-            var key = game.Grid.ToString();
-            if (!_hashTable.ContainsKey(key))
-                _hashTable[key] = _evaluator.Evaluate(game);
-            return _hashTable[key];
-        }
 
         private double ExpectiMaxScore(IGame game, byte depth)
         {
             if (game.Over || depth == 0)
-                return Score(game);
+                return _evaluator.Evaluate(game);
             double alpha;
             // Random event at node
             if (depth%2 == 0)
