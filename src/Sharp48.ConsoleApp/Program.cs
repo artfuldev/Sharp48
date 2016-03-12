@@ -21,7 +21,8 @@ namespace Sharp48.ConsoleApp
                 new SmoothnessEvaluator(),
                 new FreeSpaceEvaluator(),
                 new OneTileIsBetterThanTwoEvaluator(),
-                new Reaching2048IsAWinEvaluator()
+                new Reaching2048IsAWinEvaluator(),
+                new MonotonyEvaluator()
             };
             var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 2);
             var solver = new IntelligentSolver(mainEvaluator);

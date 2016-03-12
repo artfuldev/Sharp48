@@ -7,24 +7,28 @@ using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators
 {
-    public class SmoothnessEvaluator : ICacheableEvaluator
+    public class MonotonyEvaluator : ICacheableEvaluator
     {
         private readonly IDictionary<string, double> _squaresScores = new Dictionary<string, double>();
 
+        private static bool IsMonotonic(IEnumerable<uint> tiles)
+        {
+            var array = tiles as uint[] ?? tiles.ToArray();
+            for (var i = 0; i < array.Length - 1; i++)
+                if (array[i + 1] < array[i])
+                    return false;
+            return true;
+        }
+
         private double Evaluate(IEnumerable<ISquare> squares)
         {
-            var array = squares.Select(x=>x.GetSafeTileValue()).ToArray();
+            var array = squares.Select(x => x.GetSafeTileValue()).ToArray();
             var key = string.Join(",", array);
             if (_squaresScores.ContainsKey(key))
                 return _squaresScores[key];
             var score = 0d;
-            for (var i = 0; i < array.Length - 1; i++)
-            {
-                if (i != 0)
-                    score -= Math.Pow(Math.Abs(array[i - 1] - array[i]), 3);
-                if (i != array.Length - 1)
-                    score -= Math.Pow(Math.Abs(array[i + 1] - array[i]), 3);
-            }
+            if (IsMonotonic(array) || IsMonotonic(array.Reverse()))
+                score = Math.Pow(array.Max(), 3);
             return _squaresScores[key] = score;
         }
 
