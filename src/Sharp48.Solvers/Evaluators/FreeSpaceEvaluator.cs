@@ -7,8 +7,7 @@ namespace Sharp48.Solvers.Evaluators
 {
     public class FreeSpaceEvaluator : ICacheableEvaluator
     {
-        public double Evaluate(IGame game)
-            => game.Grid.Squares.Count(x => x.GetSafeTileValue() == 0)*Math.Pow(32768D, 3);
+        public double Evaluate(IGame game) => game.Grid.Squares.Count(x => x.GetSafeTileValue() == 0);
         public string GetCacheKey(IGame game) => game.Grid.ToString();
     }
 }

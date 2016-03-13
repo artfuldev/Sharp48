@@ -17,12 +17,12 @@ namespace Sharp48.ConsoleApp
             var logger = new NullLogger();
             var evaluators = new List<IEvaluator>()
             {
-                new ScoreEvaluator(),
-                new SmoothnessEvaluator(),
-                new FreeSpaceEvaluator(),
-                new OneTileIsBetterThanTwoEvaluator(),
+                new TransformEvaluator(new ScoreEvaluator(), (score) => 2*score),
+                new TransformEvaluator(new SmoothnessEvaluator(), (score) => 1.5*score),
+                new TransformEvaluator(new FreeSpaceEvaluator(), (score) => 2048*score),
+                new TransformEvaluator(new OneTileIsBetterThanTwoEvaluator(), (score) => 2.5*score),
+                new TransformEvaluator(new MonotonyEvaluator(), (score) => 3*score),
                 new Reaching2048IsAWinEvaluator(),
-                new MonotonyEvaluator()
             };
             var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 3);
             var solver = new IntelligentSolver(mainEvaluator);

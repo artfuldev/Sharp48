@@ -21,9 +21,9 @@ namespace Sharp48.Solvers.Evaluators
             for (var i = 0; i < array.Length - 1; i++)
             {
                 if (i != 0)
-                    score -= Math.Pow(Math.Abs(array[i - 1] - array[i]), 3);
+                    score -= Math.Abs(array[i - 1] - array[i]);
                 if (i != array.Length - 1)
-                    score -= Math.Pow(Math.Abs(array[i + 1] - array[i]), 3);
+                    score -= Math.Abs(array[i + 1] - array[i]);
             }
             return _squaresScores[key] = score;
         }
