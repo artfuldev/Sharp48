@@ -16,9 +16,9 @@ namespace Sharp48.ConsoleApp
         {
             var solver =
                 new IntelligentSolver(
-                    new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(new List<IEvaluator>()
+                    new ExpectimaxEvaluator(new CachingEvaluator(new SumEvaluator(new List<IEvaluator>()
                     {
-                        new TransformEvaluator(new SumEvaluator(3.5), (score) => 20000 - 11*score),
+                        new TransformEvaluator(new TileSumEvaluator(3.5), (score) => 20000 - 11*score),
                         new TransformEvaluator(new EmptyTileEvaluator(), (score) => 270*score),
                         new TransformEvaluator(new MergeEvaluator(), (score) => 700*score),
                         new TransformEvaluator(new MonotonicityEvaluator(4), (score) => -47*score)

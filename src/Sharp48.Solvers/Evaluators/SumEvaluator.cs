@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Sharp48.Solvers.Evaluators
 {
-    public class AggregateEvaluator : IEvaluator
+    public class SumEvaluator : IEvaluator
     {
         private readonly IEnumerable<IEvaluator> _evaluators;
 
-        public AggregateEvaluator(IEnumerable<IEvaluator> evaluators)
+        public SumEvaluator(IEnumerable<IEvaluator> evaluators)
         {
             _evaluators = evaluators;
         }

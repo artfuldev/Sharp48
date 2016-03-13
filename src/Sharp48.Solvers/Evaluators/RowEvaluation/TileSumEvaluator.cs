@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
-    public class SumEvaluator : RowEvaluatorBase
+    public class TileSumEvaluator : RowEvaluatorBase
     {
         private readonly double _factor;
 
-        public SumEvaluator(double factor)
+        public TileSumEvaluator(double factor)
         {
             _factor = factor;
         }
