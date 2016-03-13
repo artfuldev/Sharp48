@@ -14,26 +14,17 @@ namespace Sharp48.ConsoleApp
     {
         public static void Main(string[] args)
         {
-            var sumEvaluator = new SumEvaluator(3.5);
-            var emptyTileEvaluator = new EmptyTileEvaluator();
-            var mergeEvaluator = new MergeEvaluator();
-            var monotonicityEvaluator = new MonotonicityEvaluator(4);
-            sumEvaluator.Preload();
-            emptyTileEvaluator.Preload();
-            mergeEvaluator.Preload();
-            monotonicityEvaluator.Preload();
-            var evaluators = new List<IEvaluator>()
-            {
-                new TransformEvaluator(sumEvaluator, (score) => 20000 -11*score),
-                new TransformEvaluator(emptyTileEvaluator, (score) => 270*score),
-                new TransformEvaluator(mergeEvaluator, (score) => 700*score),
-                new TransformEvaluator(monotonicityEvaluator, (score) => -47*score),
-                new Reaching2048IsAWinEvaluator(),
-            };
-            var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 3, 0.0001);
-            var logger = new ConsoleLogger();
-            var solver = new IntelligentSolver(mainEvaluator);
+            var solver =
+                new IntelligentSolver(
+                    new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(new List<IEvaluator>()
+                    {
+                        new TransformEvaluator(new SumEvaluator(3.5), (score) => 20000 - 11*score),
+                        new TransformEvaluator(new EmptyTileEvaluator(), (score) => 270*score),
+                        new TransformEvaluator(new MergeEvaluator(), (score) => 700*score),
+                        new TransformEvaluator(new MonotonicityEvaluator(4), (score) => -47*score)
+                    })), 3, 0.0001));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
+            var logger = new ConsoleLogger();
             using (var runner = new GameRunner(ui, solver, logger))
                 runner.Run();
         }

@@ -15,7 +15,7 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
                     .Aggregate(grid.GetRows().Aggregate(0d, (current, next) => current + Evaluate(next.AsBytes())),
                         (current, next) => current + Evaluate(next.AsBytes()));
 
-        public void Preload()
+        protected RowEvaluatorBase()
         {
             var values = Enumerable.Range(0, 16).Select(x => (byte) x).ToArray();
             var rows = new Variations<byte>(values, 4, GenerateOption.WithRepetition);
