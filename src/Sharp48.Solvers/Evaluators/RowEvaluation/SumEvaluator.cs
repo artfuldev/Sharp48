@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
@@ -12,6 +13,7 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
             _factor = factor;
         }
 
-        protected override double EvaluateImplementation(uint[] tiles) => tiles.Sum(tile => Math.Pow(tile, _factor));
+        protected override double EvaluateImplementation(uint[] tiles)
+            => tiles.Sum(tile => Math.Pow(tile.GetLog2Value(), _factor));
     }
 }

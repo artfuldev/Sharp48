@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
@@ -9,7 +10,7 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
             var merges = 0;
             var prev = 0u;
             var counter = 0;
-            foreach (var tile in tiles.Where(x => x != 0))
+            foreach (var tile in tiles.Where(x => x != 0).Select(x=>x.GetLog2Value()))
             {
                 if (prev == tile)
                     counter++;
