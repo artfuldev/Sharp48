@@ -11,11 +11,6 @@ namespace Sharp48.Solvers.Evaluators
     {
         private readonly IDictionary<string, double> _squaresScores = new Dictionary<string, double>();
 
-        private double Smoothness(IGame game, uint squareIndex)
-        {
-            
-        }
-
         private double Evaluate(IEnumerable<ISquare> squares)
         {
             var array = squares.Select(x=>x.GetSafeTileValue()).ToArray();
