@@ -24,7 +24,7 @@ namespace Sharp48.ConsoleApp
                 new TransformEvaluator(new MonotonicityEvaluator(4), (score) => 47*score),
                 new Reaching2048IsAWinEvaluator(),
             };
-            var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 4);
+            var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 3, 0.0001);
             var solver = new IntelligentSolver(mainEvaluator);
             using (var runner = new GameRunner(ui, solver, logger))
                 runner.Run();
