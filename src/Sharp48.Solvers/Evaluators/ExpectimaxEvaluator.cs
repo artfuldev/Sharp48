@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Sharp48.Core;
 using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators
@@ -9,7 +8,7 @@ namespace Sharp48.Solvers.Evaluators
     {
         private readonly byte _depth;
         private readonly IEvaluator _evaluator;
-        private readonly IDictionary<string, double> _hashTable = new Dictionary<string, double>();
+        private readonly IDictionary<ulong, double> _hashTable = new Dictionary<ulong, double>();
         private readonly double _threshold;
 
         public ExpectimaxEvaluator(IEvaluator evaluator, byte depth, double threshold)
@@ -19,34 +18,32 @@ namespace Sharp48.Solvers.Evaluators
             _threshold = threshold;
         }
 
-        private double EvaluateInternal(IGame game)
+        private double EvaluateInternal(ulong grid)
         {
-            var key = game.Grid.ToString();
-            if (!_hashTable.ContainsKey(key))
-                _hashTable[key] = _evaluator.Evaluate(game);
-            return _hashTable[key];
+            if (!_hashTable.ContainsKey(grid))
+                _hashTable[grid] = _evaluator.Evaluate(grid);
+            return _hashTable[grid];
         }
 
-        public double Evaluate(IGame game) => ExpectiMaxScore(game, _depth, true, 1);
+        public double Evaluate(ulong grid) => ExpectiMaxScore(grid, _depth, true, 1);
 
-        private double ExpectiMaxScore(IGame game, byte depth, bool randomEvent, double cumulativeProbability)
+        private double ExpectiMaxScore(ulong grid, byte depth, bool randomEvent, double cumulativeProbability)
         {
-            if (game.Over || depth == 0 || cumulativeProbability < _threshold)
-                return EvaluateInternal(game);
-            var key = game.Grid.ToString();
-            if (_hashTable.ContainsKey(key))
-                return _hashTable[key];
+            if (grid.NoMovesLeft() || depth == 0 || cumulativeProbability < _threshold)
+                return EvaluateInternal(grid);
+            if (_hashTable.ContainsKey(grid))
+                return _hashTable[grid];
             double alpha;
             // Random event at node
             if (randomEvent)
             {
-                var emptySquaresCount = game.Grid.Squares.Count(x => x.GetSafeTileValue() == 0);
+                var emptySquaresCount = grid.EmptySquaresCount();
                 cumulativeProbability /= emptySquaresCount;
-                var gamesWith2 = game.GetPossible2Generations().ToList();
+                var gamesWith2 = grid.GetPossible2Generations().ToList();
                 alpha =
                     gamesWith2.Sum(
                         node => 0.9*ExpectiMaxScore(node, (byte) (depth - 1), false, cumulativeProbability*0.9));
-                var gamesWith4 = game.GetPossible4Generations().ToList();
+                var gamesWith4 = grid.GetPossible4Generations().ToList();
                 alpha +=
                     gamesWith4.Sum(
                         node => 0.1*ExpectiMaxScore(node, (byte) (depth - 1), false, cumulativeProbability*0.1));
@@ -54,7 +51,7 @@ namespace Sharp48.Solvers.Evaluators
             // If we are to play at node
             else
             {
-                var possibleGames = game.GetPossibleMoves().Select(game.MakeMove);
+                var possibleGames = grid.GetPossibleMoves().Select(move => grid.MakeMove(move));
                 alpha = possibleGames.Max(x => ExpectiMaxScore(x, (byte) (depth - 1), true, cumulativeProbability));
             }
             return alpha;
