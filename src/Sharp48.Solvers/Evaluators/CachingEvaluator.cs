@@ -1,24 +1,22 @@
 ﻿using System.Collections.Generic;
-using Sharp48.Core;
 
 namespace Sharp48.Solvers.Evaluators
 {
     public class CachingEvaluator : IEvaluator
     {
-        private readonly ICacheableEvaluator _evaluator;
-        private readonly IDictionary<string, double> _hashTable = new Dictionary<string, double>();
+        private readonly IEvaluator _evaluator;
+        private readonly IDictionary<ulong, double> _hashTable = new Dictionary<ulong, double>();
 
-        public CachingEvaluator(ICacheableEvaluator evaluator)
+        public CachingEvaluator(IEvaluator evaluator)
         {
             _evaluator = evaluator;
         }
 
-        public double Evaluate(IGame game)
+        public double Evaluate(ulong grid)
         {
-            var key = _evaluator.GetCacheKey(game);
-            if (!_hashTable.ContainsKey(key))
-                _hashTable[key] = _evaluator.Evaluate(game);
-            return _hashTable[key];
+            if (!_hashTable.ContainsKey(grid))
+                _hashTable[grid] = _evaluator.Evaluate(grid);
+            return _hashTable[grid];
         }
     }
 }

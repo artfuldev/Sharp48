@@ -24,17 +24,16 @@ namespace Sharp48.ConsoleApp
             monotonicityEvaluator.Preload();
             var evaluators = new List<IEvaluator>()
             {
-                new TransformEvaluator(sumEvaluator, (score) => 11*score),
+                new TransformEvaluator(sumEvaluator, (score) => 20000 -11*score),
                 new TransformEvaluator(emptyTileEvaluator, (score) => 270*score),
                 new TransformEvaluator(mergeEvaluator, (score) => 700*score),
-                new TransformEvaluator(monotonicityEvaluator, (score) => 47*score),
+                new TransformEvaluator(monotonicityEvaluator, (score) => -47*score),
                 new Reaching2048IsAWinEvaluator(),
             };
-            var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 4, 0.0001);
+            var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 3, 0.0001);
+            var logger = new ConsoleLogger();
             var solver = new IntelligentSolver(mainEvaluator);
-            var driverPath = Path.Combine(Environment.CurrentDirectory);
-            var ui = new GoogleChromeUI(driverPath);
-            var logger = new NullLogger();
+            var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
             using (var runner = new GameRunner(ui, solver, logger))
                 runner.Run();
         }

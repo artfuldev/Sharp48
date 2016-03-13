@@ -7,10 +7,17 @@ namespace Sharp48.Solvers.Evaluators
 {
     public class ExpectimaxEvaluator : IEvaluator
     {
-        private readonly IEvaluator _evaluator;
         private readonly byte _depth;
-        private readonly double _threshold;
+        private readonly IEvaluator _evaluator;
         private readonly IDictionary<string, double> _hashTable = new Dictionary<string, double>();
+        private readonly double _threshold;
+
+        public ExpectimaxEvaluator(IEvaluator evaluator, byte depth, double threshold)
+        {
+            _evaluator = evaluator;
+            _depth = depth;
+            _threshold = threshold;
+        }
 
         private double EvaluateInternal(IGame game)
         {
@@ -18,13 +25,6 @@ namespace Sharp48.Solvers.Evaluators
             if (!_hashTable.ContainsKey(key))
                 _hashTable[key] = _evaluator.Evaluate(game);
             return _hashTable[key];
-        }
-
-        public ExpectimaxEvaluator(IEvaluator evaluator, byte depth, double threshold)
-        {
-            _evaluator = evaluator;
-            _depth = depth;
-            _threshold = threshold;
         }
 
         public double Evaluate(IGame game) => ExpectiMaxScore(game, _depth, true, 1);
