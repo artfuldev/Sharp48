@@ -17,12 +17,15 @@ namespace Sharp48.ConsoleApp
             var logger = new NullLogger();
             var evaluators = new List<IEvaluator>()
             {
-                new TransformEvaluator(new FreeSpaceEvaluator(), (score) => 2*score),
-                new TransformEvaluator(new MonotonyEvaluator(), (score) => 1*score),
-                new TransformEvaluator(new PotentialMergesEvaluator(), (score) => 2*score),
-                new Reaching2048IsAWinEvaluator()
+                new TransformEvaluator(new FreeSpaceEvaluator(), (score) => Math.Pow(score,4)),
+                new TransformEvaluator(new SmoothnessEvaluator(), (score) => score),
+                new TransformEvaluator(new MonotonyEvaluator(), (score) => 32768*score),
+                new TransformEvaluator(new MaxTileEvaluator(), (score) => score*score),
+                new TransformEvaluator(new CornerMaxTileEvaluator(), (score) => 32768*32768*score),
+                new TransformEvaluator(new PotentialMergesEvaluator(), (score) => score*score),
+                new Reaching2048IsAWinEvaluator(),
             };
-            var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 4);
+            var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 3);
             var solver = new IntelligentSolver(mainEvaluator);
             using (var runner = new GameRunner(ui, solver, logger))
                 runner.Run();
