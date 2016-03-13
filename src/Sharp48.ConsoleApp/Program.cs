@@ -18,7 +18,7 @@ namespace Sharp48.ConsoleApp
             var logger = new NullLogger();
             var evaluators = new List<IEvaluator>()
             {
-                new TransformEvaluator(new RowScoreEvaluator(3.5), (score) => 11*score),
+                new TransformEvaluator(new SumEvaluator(3.5), (score) => 11*score),
                 new TransformEvaluator(new EmptyTileEvaluator(), (score) => 270*score),
                 new TransformEvaluator(new MergeEvaluator(), (score) => 700*score),
                 new TransformEvaluator(new MonotonicityEvaluator(4), (score) => 47*score),
