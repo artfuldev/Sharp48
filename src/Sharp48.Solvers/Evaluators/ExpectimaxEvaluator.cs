@@ -38,9 +38,10 @@ namespace Sharp48.Solvers.Evaluators
             // Random event at node
             if (randomEvent)
             {
-                var possibleGenerations = game.GetPossibleGenerations().ToList();
-                var probability = (double) 1/possibleGenerations.Count;
-                alpha = possibleGenerations.Sum(node => probability*ExpectiMaxScore(node, (byte) (depth - 1), false));
+                var gamesWith2 = game.GetPossible2Generations().ToList();
+                alpha = gamesWith2.Sum(node => 0.90*ExpectiMaxScore(node, (byte) (depth - 1), false));
+                var gamesWith4 = game.GetPossible4Generations().ToList();
+                alpha += gamesWith4.Sum(node => 0.10 * ExpectiMaxScore(node, (byte)(depth - 1), false));
             }
             // If we are to play at node
             else

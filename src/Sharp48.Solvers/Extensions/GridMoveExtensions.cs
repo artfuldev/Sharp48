@@ -15,20 +15,24 @@ namespace Sharp48.Solvers.Extensions
                 .OrderBy(x => x);
 
         public static IEnumerable<IGrid> GetPossibleGenerations(this IGrid grid)
+            => grid.GetPossible2Generations().Concat(grid.GetPossible4Generations());
+
+        public static IEnumerable<IGrid> GetPossible2Generations(this IGrid grid) => grid.GetPossibleNGenerations(2);
+
+        public static IEnumerable<IGrid> GetPossibleNGenerations(this IGrid grid, uint n)
         {
             var gridString = grid.ToString();
-            var squares = gridString.Split(new[] {Environment.NewLine, ","}, StringSplitOptions.None);
+            var squares = gridString.Split(new[] { Environment.NewLine, "," }, StringSplitOptions.None);
             for (var i = 0; i < 16; i++)
                 if (string.IsNullOrWhiteSpace(squares[i]))
                 {
                     var squaresCopy2 = squares.Select(x => x).ToArray();
-                    squaresCopy2[i] = "2";
+                    squaresCopy2[i] = n.ToString();
                     yield return Grid.Parse(string.Join(",", squaresCopy2));
-                    var squaresCopy4 = squares.Select(x => x).ToArray();
-                    squaresCopy4[i] = "4";
-                    yield return Grid.Parse(string.Join(",", squaresCopy4));
                 }
         }
+
+        public static IEnumerable<IGrid> GetPossible4Generations(this IGrid grid) => grid.GetPossibleNGenerations(4);
 
         public static IGrid MakeMove(this IGrid grid, Move move, out uint score)
         {
