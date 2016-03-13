@@ -21,6 +21,7 @@ namespace Sharp48.ConsoleApp
                 new TransformEvaluator(new RowScoreEvaluator(3.5), (score) => 11*score),
                 new TransformEvaluator(new EmptyTileEvaluator(), (score) => 270*score),
                 new TransformEvaluator(new MergeEvaluator(), (score) => 700*score),
+                new TransformEvaluator(new MonotonicityEvaluator(4), (score) => 47*score),
                 new Reaching2048IsAWinEvaluator(),
             };
             var mainEvaluator = new ExpectimaxEvaluator(new CachingEvaluator(new AggregateEvaluator(evaluators)), 4);
