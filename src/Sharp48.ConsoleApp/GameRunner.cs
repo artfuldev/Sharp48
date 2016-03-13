@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Sharp48.ConsoleApp.Logging;
 using Sharp48.Solvers;
 using Sharp48.UserInterfaces;
@@ -32,7 +33,7 @@ namespace Sharp48.ConsoleApp
                 game = _ui.MakeMove(_solver.GetBestMove(game));
                 _logger.Log(game.Score);
             }
-            Console.ReadLine();
+            Task.Delay(3000).Wait();
         }
     }
 }

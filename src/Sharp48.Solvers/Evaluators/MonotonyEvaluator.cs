@@ -26,7 +26,7 @@ namespace Sharp48.Solvers.Evaluators
             var key = string.Join(",", array);
             if (_squaresScores.ContainsKey(key))
                 return _squaresScores[key];
-            var score = IsMonotonic(array) || IsMonotonic(array.Reverse()) ? 1 : 0;
+            var score = IsMonotonic(array) || IsMonotonic(array.Reverse()) ? array.Max() + array.Min() : 0;
             return _squaresScores[key] = score;
         }
 
