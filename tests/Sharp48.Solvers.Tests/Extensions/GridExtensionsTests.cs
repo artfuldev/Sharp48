@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Sharp48.Solvers.Extensions;
 using Xunit;
-using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Tests.Extensions
 {
     public class GridExtensionsTests
     {
         [Theory]
-        [InlineData((ushort)0x0129, (ushort)0x9210)]
+        [InlineData((ushort) 0x0129, (ushort) 0x9210)]
         public void ReverseWorks(ushort input, ushort output)
         {
             // Act
@@ -15,6 +14,6 @@ namespace Sharp48.Solvers.Tests.Extensions
 
             // Assert
             Assert.Equal(output, reverse);
-        } 
+        }
     }
 }

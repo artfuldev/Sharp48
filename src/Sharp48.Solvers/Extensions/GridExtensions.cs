@@ -59,6 +59,6 @@ namespace Sharp48.Solvers.Extensions
         public static ulong AsGrid(this IGame game)
         {
             return 0ul;
-        } 
+        }
     }
 }

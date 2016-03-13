@@ -18,14 +18,14 @@ namespace Sharp48.Solvers.Evaluators
             _threshold = threshold;
         }
 
+        public double Evaluate(ulong grid) => ExpectiMaxScore(grid, _depth, true, 1);
+
         private double EvaluateInternal(ulong grid)
         {
             if (!_hashTable.ContainsKey(grid))
                 _hashTable[grid] = _evaluator.Evaluate(grid);
             return _hashTable[grid];
         }
-
-        public double Evaluate(ulong grid) => ExpectiMaxScore(grid, _depth, true, 1);
 
         private double ExpectiMaxScore(ulong grid, byte depth, bool randomEvent, double cumulativeProbability)
         {

@@ -22,7 +22,9 @@ namespace Sharp48.Solvers
             var possibleMoves = grid.GetPossibleMoves();
             var movesToScoreDictionary = possibleMoves.ToDictionary(x => x, x => _evaluator.Evaluate(grid.MakeMove(x)));
             var bestScore = movesToScoreDictionary.Max(x => x.Value);
-            return movesToScoreDictionary.First(x => double.IsPositiveInfinity(x.Value) || Math.Abs(x.Value - bestScore) < 0.1).Key;
+            return
+                movesToScoreDictionary.First(
+                    x => double.IsPositiveInfinity(x.Value) || Math.Abs(x.Value - bestScore) < 0.1).Key;
         }
     }
 }
