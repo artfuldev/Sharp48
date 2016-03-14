@@ -36,7 +36,18 @@ namespace Sharp48.Solvers.Extensions
 
         public static byte EmptySquaresCount(this ulong grid)
         {
-            return 0;
+            grid |= (grid >> 2) & 0x3333333333333333UL;
+            grid |= (grid >> 1);
+            grid = ~grid & 0x1111111111111111UL;
+            // At this point each nibble is:
+            //  0 if the original nibble was non-zero
+            //  1 if the original nibble was zero
+            // Next sum them all
+            grid += grid >> 32;
+            grid += grid >> 16;
+            grid += grid >> 8;
+            grid += grid >> 4; // this can overflow to the next nibble if there were 16 empty positions
+            return (byte) (grid & 0xf);
         }
 
         public static IEnumerable<ulong> GetPossible2Generations(this ulong grid)
