@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Sharp48.Core;
 using Sharp48.Core.Moves;
 
@@ -58,7 +61,13 @@ namespace Sharp48.Solvers.Extensions
 
         public static ulong AsGrid(this IGame game)
         {
-            return 0ul;
+            var strings = game.Grid.Squares.Select(x =>
+            {
+                var value = x.Tile?.Value ?? 0;
+                return value == 0 ? "0" : (Math.Log(value)/Math.Log(2)).ToString("N0", CultureInfo.InvariantCulture);
+            });
+            var aggregate = strings.Aggregate((current, next) => current + next);
+            return ulong.Parse(aggregate, NumberStyles.AllowHexSpecifier);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Sharp48.Solvers.Extensions;
+﻿using Sharp48.Core;
+using Sharp48.Core.PlayArea;
+using Sharp48.Solvers.Extensions;
 using Xunit;
 
 namespace Sharp48.Solvers.Tests.Extensions
@@ -14,6 +16,21 @@ namespace Sharp48.Solvers.Tests.Extensions
 
             // Assert
             Assert.Equal(output, reverse);
+        }
+
+        [Theory]
+        [InlineData(",,2,,4,,8,4,2,4,32,16,2,2,512,256", 0x0010203212541198ul)]
+        public void GameAsGridWorks(string gridString, ulong expected)
+        {
+            // Arrange
+            var grid = Grid.Parse(gridString);
+            var game = new Game(grid, false, 0);
+
+            // Act
+            var actual = game.AsGrid();
+
+            // Assert
+            Assert.Equal(expected, actual);
         }
     }
 }
