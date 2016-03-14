@@ -28,6 +28,23 @@ namespace Sharp48.Solvers.Extensions
             };
         }
 
+        // Transpose rows/columns in a board:
+        //   0123       048c
+        //   4567  -->  159d
+        //   89ab       26ae
+        //   cdef       37bf
+        public static ulong Transpose(this ulong grid)
+        {
+            var a1 = grid & 0xF0F00F0FF0F00F0FUL;
+            var a2 = grid & 0x0000F0F00000F0F0UL;
+            var a3 = grid & 0x0F0F00000F0F0000UL;
+            var a = a1 | (a2 << 12) | (a3 >> 12);
+            var b1 = a & 0xFF00FF0000FF00FFUL;
+            var b2 = a & 0x00FF00FF00000000UL;
+            var b3 = a & 0x00000000FF00FF00UL;
+            return b1 | (b2 >> 24) | (b3 << 24);
+        }
+
         public static byte[] AsTiles(this ushort row)
         {
             return new[]

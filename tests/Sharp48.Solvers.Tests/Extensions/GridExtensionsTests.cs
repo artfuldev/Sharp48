@@ -76,5 +76,16 @@ namespace Sharp48.Solvers.Tests.Extensions
             Assert.Equal(expected, actual);
 
         }
+
+        [Theory]
+        [InlineData(0x0010203212541198UL, 0x0211002113590248UL)]
+        public void TransposeWorks(ulong grid, ulong expected)
+        {
+            // Act
+            var actual = grid.Transpose();
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
