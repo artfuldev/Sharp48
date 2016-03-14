@@ -12,8 +12,8 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
         public double Evaluate(ulong grid)
             =>
                 grid.GetColumns()
-                    .Aggregate(grid.GetRows().Aggregate(0d, (current, next) => current + Evaluate(next.AsBytes())),
-                        (current, next) => current + Evaluate(next.AsBytes()));
+                    .Aggregate(grid.GetRows().Aggregate(0d, (current, next) => current + Evaluate(next.AsTiles())),
+                        (current, next) => current + Evaluate(next.AsTiles()));
 
         protected RowEvaluatorBase()
         {

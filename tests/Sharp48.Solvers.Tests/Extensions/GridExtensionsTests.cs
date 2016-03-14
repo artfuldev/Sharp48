@@ -1,4 +1,7 @@
-﻿using Sharp48.Core;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using Sharp48.Core;
 using Sharp48.Core.PlayArea;
 using Sharp48.Solvers.Extensions;
 using Xunit;
@@ -42,6 +45,21 @@ namespace Sharp48.Solvers.Tests.Extensions
 
             // Assert
             Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData((ushort) 0x0010, "0,0,1,0")]
+        public void AsTilesWorks(ushort row, string tiles)
+        {
+            // Arrange
+            var expected = tiles.Split(',').Select(x => Convert.ToByte(x)).ToArray();
+
+            // Act
+            var actual = row.AsTiles();
+
+            // Assert
+            Assert.Equal(expected, actual);
+
         }
     }
 }

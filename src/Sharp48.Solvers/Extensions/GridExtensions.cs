@@ -9,6 +9,9 @@ namespace Sharp48.Solvers.Extensions
 {
     public static class GridExtensions
     {
+        private const ulong RowMask = 0xFFFFUL;
+        private const ulong ColumnMask = 0x000F000F000F000FUL;
+
         public static ushort[] GetColumns(this ulong grid)
         {
             return new ushort[0];
@@ -19,9 +22,15 @@ namespace Sharp48.Solvers.Extensions
             return new ushort[0];
         }
 
-        public static byte[] AsBytes(this ushort row)
+        public static byte[] AsTiles(this ushort row)
         {
-            return new byte[0];
+            return new[]
+            {
+                (byte) ((row >> 12) & 0xf),
+                (byte) ((row >> 8) & 0xf),
+                (byte) ((row >> 4) & 0xf),
+                (byte) ((row >> 0) & 0xf)
+            };
         }
 
         public static ushort Reverse(this ushort row)
@@ -37,7 +46,7 @@ namespace Sharp48.Solvers.Extensions
         public static byte EmptySquaresCount(this ulong grid)
         {
             grid |= (grid >> 2) & 0x3333333333333333UL;
-            grid |= (grid >> 1);
+            grid |= grid >> 1;
             grid = ~grid & 0x1111111111111111UL;
             // At this point each nibble is:
             //  0 if the original nibble was non-zero
