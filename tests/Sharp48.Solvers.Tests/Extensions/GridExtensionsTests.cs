@@ -61,5 +61,20 @@ namespace Sharp48.Solvers.Tests.Extensions
             Assert.Equal(expected, actual);
 
         }
+
+        [Theory]
+        [InlineData(0x0010203212541198UL, (ushort)0x0010, (ushort)0x2032, (ushort)0x1254, (ushort)0x1198)]
+        public void GetRowsWorks(ulong grid, ushort row1, ushort row2, ushort row3, ushort row4)
+        {
+            // Arrange
+            var expected = new[] {row1, row2, row3, row4};
+
+            // Act
+            var actual = grid.GetRows();
+
+            // Assert
+            Assert.Equal(expected, actual);
+
+        }
     }
 }

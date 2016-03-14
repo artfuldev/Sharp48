@@ -19,7 +19,13 @@ namespace Sharp48.Solvers.Extensions
 
         public static ushort[] GetRows(this ulong grid)
         {
-            return new ushort[0];
+            return new[]
+            {
+                (ushort) ((grid >> 48) & RowMask),
+                (ushort) ((grid >> 32) & RowMask),
+                (ushort) ((grid >> 16) & RowMask),
+                (ushort) ((grid >> 0) & RowMask)
+            };
         }
 
         public static byte[] AsTiles(this ushort row)
