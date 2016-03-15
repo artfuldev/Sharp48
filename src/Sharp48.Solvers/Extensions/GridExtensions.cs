@@ -70,7 +70,7 @@ namespace Sharp48.Solvers.Extensions
 
         public static bool NoMovesLeft(this ulong grid)
         {
-            return false;
+            return !grid.GetPossibleMoves().Any();
         }
 
         public static byte EmptySquaresCount(this ulong grid)
