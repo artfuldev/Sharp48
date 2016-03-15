@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Sharp48.Core;
 using Sharp48.Core.Moves;
+using Sharp48.Solvers.MoveExecutors;
 
 namespace Sharp48.Solvers.Extensions
 {
@@ -11,6 +12,7 @@ namespace Sharp48.Solvers.Extensions
     {
         private const ulong RowMask = 0xFFFFUL;
         private const ulong ColumnMask = 0x000F000F000F000FUL;
+        private static readonly IMoveExecutor MoveExecutor = new MoveExecutor();
 
         public static ushort[] GetColumns(this ulong grid)
         {
@@ -115,7 +117,7 @@ namespace Sharp48.Solvers.Extensions
 
         public static IEnumerable<Move> GetPossibleMoves(this ulong grid)
         {
-            return new Move[0];
+            return MoveExecutor.GetPossibleMoves(grid);
         }
 
         public static ulong MakeMove(this ulong grid, Move move)
