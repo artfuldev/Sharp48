@@ -107,10 +107,10 @@ namespace Sharp48.Solvers.Tests.Extensions
         public void GetPossible2GenerationsWorks(ulong grid, ulong grid1, ulong grid2, ulong grid3, ulong grid4)
         {
             // Arrange
-            var expected = new[] { grid1, grid2, grid3, grid4 };
+            var expected = new[] { grid1, grid2, grid3, grid4 }.Reverse();
 
             // Act
-            var actual = grid.GetPossible2Generations().Reverse();
+            var actual = grid.GetPossible2Generations();
 
             // Assert
             Assert.Equal(expected, actual);
@@ -121,10 +121,10 @@ namespace Sharp48.Solvers.Tests.Extensions
         public void GetPossible4GenerationsWorks(ulong grid, ulong grid1, ulong grid2, ulong grid3, ulong grid4)
         {
             // Arrange
-            var expected = new[] { grid1, grid2, grid3, grid4 };
+            var expected = new[] { grid1, grid2, grid3, grid4 }.Reverse();
 
             // Act
-            var actual = grid.GetPossible4Generations().Reverse();
+            var actual = grid.GetPossible4Generations();
 
             // Assert
             Assert.Equal(expected, actual);
