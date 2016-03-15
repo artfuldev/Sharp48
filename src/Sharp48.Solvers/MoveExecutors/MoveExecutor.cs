@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Facet.Combinatorics;
 using Sharp48.Core.Moves;
@@ -44,20 +45,14 @@ namespace Sharp48.Solvers.MoveExecutors
                         row[j] = 0;
                     }
                 }
-                var leftMoveResult = (ushort) ((row[0] << 0) |
-                                               (row[1] << 4) |
-                                               (row[2] << 8) |
-                                               (row[3] << 12));
-                var rightMoveResult = leftMoveResult.Reverse();
+                var result = row.ToArray().ToRow();
                 if(!_lookup.ContainsKey(copy))
                     _lookup[copy] = new Dictionary<Move, ushort>();
                 var reverse = copy.Reverse();
                 if (!_lookup.ContainsKey(reverse))
                     _lookup[reverse] = new Dictionary<Move, ushort>();
-                _lookup[copy][Move.Left] = leftMoveResult;
-                _lookup[copy][Move.Right] = rightMoveResult;
-                _lookup[reverse][Move.Left] = rightMoveResult;
-                _lookup[reverse][Move.Right] = leftMoveResult;
+                _lookup[copy][Move.Left] = result;
+                _lookup[reverse][Move.Right] = result.Reverse();
             }
         }
 
