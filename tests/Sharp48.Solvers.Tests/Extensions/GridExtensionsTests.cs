@@ -115,5 +115,19 @@ namespace Sharp48.Solvers.Tests.Extensions
             // Assert
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData(0x0010203212541198UL, 0x2010203212541198UL, 0x0210203212541198UL, 0x0012203212541198UL, 0x0010223212541198UL)]
+        public void GetPossible4GenerationsWorks(ulong grid, ulong grid1, ulong grid2, ulong grid3, ulong grid4)
+        {
+            // Arrange
+            var expected = new[] { grid1, grid2, grid3, grid4 };
+
+            // Act
+            var actual = grid.GetPossible4Generations().Reverse();
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }

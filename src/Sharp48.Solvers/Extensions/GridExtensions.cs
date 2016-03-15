@@ -97,7 +97,15 @@ namespace Sharp48.Solvers.Extensions
 
         public static IEnumerable<ulong> GetPossible4Generations(this ulong grid)
         {
-            return new ulong[0];
+            var copy = grid;
+            var tile4 = 2ul;
+            while (tile4 != 0)
+            {
+                if ((copy & 0xf) == 0)
+                    yield return grid | tile4;
+                copy >>= 4;
+                tile4 <<= 4;
+            }
         }
 
         public static IEnumerable<Move> GetPossibleMoves(this ulong grid)
