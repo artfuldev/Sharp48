@@ -31,15 +31,15 @@ namespace Sharp48.Solvers.MoveExecutors
                             .Distinct());
         }
 
-        public ushort MakeMove(ushort rows, Move move)
+        public ushort MakeMove(ushort row, Move move)
         {
             switch (move)
             {
                 case Move.Left:
                 case Move.Right:
-                    return _lookup[rows][move];
+                    return _lookup[row][move];
                 default:
-                    return rows;
+                    return row;
             }
         }
 
