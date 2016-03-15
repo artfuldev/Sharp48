@@ -18,10 +18,14 @@ namespace Sharp48.Solvers
 
         public Move GetBestMove(IGame game)
         {
-            var possibleMoves = game.GetPossibleMoves();
-            var movesToScoreDictionary = possibleMoves.ToDictionary(x => x, x => _evaluator.Evaluate(game.MakeMove(x)));
+            var grid = game.AsGrid();
+            var possibleMoves = grid.GetPossibleMoves().ToArray();
+            var movesToScoreDictionary = possibleMoves.ToDictionary(x => x, x => _evaluator.Evaluate(grid.MakeMove(x)));
             var bestScore = movesToScoreDictionary.Max(x => x.Value);
-            return movesToScoreDictionary.First(x => double.IsPositiveInfinity(x.Value) || Math.Abs(x.Value - bestScore) < 0.1).Key;
+            return double.IsNegativeInfinity(bestScore)
+                ? possibleMoves.First()
+                : movesToScoreDictionary.FirstOrDefault(
+                    x => double.IsPositiveInfinity(x.Value) || Math.Abs(x.Value - bestScore) < 0.1).Key;
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
-using Sharp48.Core;
 
 namespace Sharp48.Solvers.Evaluators
 {
-    public class TransformEvaluator : ICacheableEvaluator
+    public class TransformEvaluator : IEvaluator
     {
         private readonly IEvaluator _evaluator;
         private readonly Func<double, double> _transformFunc;
@@ -14,8 +13,6 @@ namespace Sharp48.Solvers.Evaluators
             _transformFunc = transformFunc;
         }
 
-        public double Evaluate(IGame game) => _transformFunc(_evaluator.Evaluate(game));
-
-        public string GetCacheKey(IGame game) => game.Grid.ToString();
+        public double Evaluate(ulong grid) => _transformFunc(_evaluator.Evaluate(grid));
     }
 }

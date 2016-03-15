@@ -4,6 +4,6 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
     public class EmptyTileEvaluator : RowEvaluatorBase
     {
-        protected override double EvaluateImplementation(uint[] tiles) => tiles.Count(x => x == 0);
+        protected override double EvaluateImplementation(byte[] tiles) => tiles.Count(x => x == 0);
     }
 }

@@ -1,8 +1,7 @@
 ﻿namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
-    public interface IRowEvaluator : ICacheableEvaluator
+    public interface IRowEvaluator : IEvaluator
     {
-        void Preload();
-        double Evaluate(uint[] tiles);
+        double Evaluate(byte[] tiles);
     }
 }

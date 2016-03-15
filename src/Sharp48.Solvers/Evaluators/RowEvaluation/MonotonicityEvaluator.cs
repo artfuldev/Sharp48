@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
@@ -13,17 +11,16 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
             _factor = factor;
         }
 
-        protected override double EvaluateImplementation(uint[] tiles)
+        protected override double EvaluateImplementation(byte[] tiles)
         {
-            var logs = tiles.Select(x => x.GetLog2Value()).ToArray();
             var monotonicityLeft = 0d;
             var monotonicityRight = 0d;
             for (var i = 1; i < 4; ++i)
             {
-                if (logs[i - 1] > logs[i])
-                    monotonicityLeft += Math.Pow(logs[i - 1], _factor) - Math.Pow(logs[i], _factor);
+                if (tiles[i - 1] > tiles[i])
+                    monotonicityLeft += Math.Pow(tiles[i - 1], _factor) - Math.Pow(tiles[i], _factor);
                 else
-                    monotonicityRight += Math.Pow(logs[i], _factor) - Math.Pow(logs[i - 1], _factor);
+                    monotonicityRight += Math.Pow(tiles[i], _factor) - Math.Pow(tiles[i - 1], _factor);
             }
             return Math.Min(monotonicityLeft, monotonicityRight);
         }
