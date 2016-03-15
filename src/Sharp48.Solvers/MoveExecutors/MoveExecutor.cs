@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sharp48.Core.Moves;
 using Sharp48.Solvers.Extensions;
@@ -53,8 +54,9 @@ namespace Sharp48.Solvers.MoveExecutors
                 case Move.Left:
                 case Move.Right:
                     return grid.GetRows().Select(x => MakeMove(x, move)).ToArray().ToGrid();
+                default:
+                    return grid;
             }
-            return grid;
         }
     }
 }
