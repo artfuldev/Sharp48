@@ -143,5 +143,19 @@ namespace Sharp48.Solvers.Tests.Extensions
             // Assert
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData((byte)1, (byte)1, (byte)9, (byte)8, (ushort)0x1198)]
+        public void ToRowWorks(byte tile1, byte tile2, byte tile3, byte tile4, ushort expected)
+        {
+            // Arrange
+            var tiles = new[] { tile1, tile2, tile3, tile4 };
+
+            // Act
+            var actual = tiles.ToRow();
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }

@@ -56,6 +56,11 @@ namespace Sharp48.Solvers.Extensions
             };
         }
 
+        public static ushort ToRow(this byte[] tiles)
+        {
+            return tiles.Aggregate((ushort) 0, (current, row) => (ushort) (current << 4 | row));
+        }
+
         public static ushort Reverse(this ushort row)
         {
             return (ushort) ((row >> 12) | ((row >> 4) & 0x00F0) | ((row << 4) & 0x0F00) | (row << 12));
