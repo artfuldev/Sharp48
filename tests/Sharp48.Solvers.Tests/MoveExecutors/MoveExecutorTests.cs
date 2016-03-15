@@ -1,4 +1,7 @@
-﻿using Sharp48.Core.Moves;
+﻿using System;
+using System.Linq;
+using Sharp48.Core.Moves;
+using Sharp48.Solvers.Extensions;
 using Sharp48.Solvers.MoveExecutors;
 using Xunit;
 
@@ -27,6 +30,22 @@ namespace Sharp48.Solvers.Tests.MoveExecutors
         {
             // Act
             var actual = _executor.MakeMove(row, Move.Right);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(0x1120211589661006ul, "Up,Right,Down,Left")]
+        [InlineData(0x1243211589471666ul, "Right,Left")]
+        public void GetPossibleMovesWorks(ulong grid, string moves)
+        {
+            // Arrange
+            Move move;
+            var expected = moves.Split(',').Select(x => Enum.TryParse(x, out move) ? move : Move.Up).OrderBy(x => x);
+
+            // Act
+            var actual = _executor.GetPossibleMoves(grid).OrderBy(x => x);
 
             // Assert
             Assert.Equal(expected, actual);
