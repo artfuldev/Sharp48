@@ -128,5 +128,10 @@ namespace Sharp48.Solvers.Extensions
             var aggregate = strings.Aggregate((current, next) => current + next);
             return ulong.Parse(aggregate, NumberStyles.AllowHexSpecifier);
         }
+
+        public static ulong ToGrid(this ushort[] rows)
+        {
+            return rows.Aggregate(0ul, (current, row) => current << 16 | row);
+        }
     }
 }

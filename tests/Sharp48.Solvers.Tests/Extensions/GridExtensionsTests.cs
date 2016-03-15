@@ -129,5 +129,19 @@ namespace Sharp48.Solvers.Tests.Extensions
             // Assert
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData((ushort)0x0010, (ushort)0x2032, (ushort)0x1254, (ushort)0x1198, 0x0010203212541198UL)]
+        public void ToGridWorks(ushort row1, ushort row2, ushort row3, ushort row4, ulong expected)
+        {
+            // Arrange
+            var rows = new[] { row1, row2, row3, row4 };
+
+            // Act
+            var actual = rows.ToGrid();
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
