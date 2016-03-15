@@ -17,7 +17,7 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
 
         protected RowEvaluatorBase()
         {
-            var values = Enumerable.Range(0, 16).Select(x => (byte) x).ToArray();
+            var values = Enumerable.Range(0, 15).Select(x => (byte) x).ToArray();
             var rows = new Variations<byte>(values, 4, GenerateOption.WithRepetition);
             foreach (var row in rows)
                 Evaluate(row.ToArray());
