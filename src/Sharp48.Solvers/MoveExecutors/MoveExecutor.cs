@@ -9,11 +9,11 @@ namespace Sharp48.Solvers.MoveExecutors
     {
         private readonly IDictionary<ushort, IDictionary<Move,ushort>> _lookup;
 
-        private IEnumerable<Move> GetPossibleMoves(ushort row)
+        public IEnumerable<Move> GetPossibleMoves(ushort row)
         {
-            if (_lookup[row][Move.Left] != 0)
+            if (_lookup[row][Move.Left] != row)
                 yield return Move.Left;
-            if (_lookup[row][Move.Right] != 0)
+            if (_lookup[row][Move.Right] != row)
                 yield return Move.Right;
         }
 
@@ -30,9 +30,31 @@ namespace Sharp48.Solvers.MoveExecutors
                             .Distinct());
         }
 
+        public ushort MakeMove(ushort rows, Move move)
+        {
+            switch (move)
+            {
+                case Move.Left:
+                case Move.Right:
+                    return _lookup[rows][move];
+                default:
+                    return rows;
+            }
+        }
+
         public ulong MakeMove(ulong grid, Move move)
         {
-            return 0ul;
+            switch (move)
+            {
+                case Move.Up:
+                case Move.Down:
+                    var lookupMove = move == Move.Up ? Move.Left : Move.Right;
+                    return grid.Transpose().GetRows().Select(x => MakeMove(x, lookupMove)).ToArray().ToGrid().Transpose();
+                case Move.Left:
+                case Move.Right:
+                    return grid.GetRows().Select(x => MakeMove(x, move)).ToArray().ToGrid();
+            }
+            return grid;
         }
     }
 }
