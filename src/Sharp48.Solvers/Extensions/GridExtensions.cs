@@ -14,7 +14,7 @@ namespace Sharp48.Solvers.Extensions
 
         public static ushort[] GetColumns(this ulong grid)
         {
-            return new ushort[0];
+            return grid.Transpose().GetRows();
         }
 
         public static ushort[] GetRows(this ulong grid)
