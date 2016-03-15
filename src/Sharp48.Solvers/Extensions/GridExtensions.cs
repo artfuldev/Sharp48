@@ -11,7 +11,11 @@ namespace Sharp48.Solvers.Extensions
     public static class GridExtensions
     {
         private const ulong RowMask = 0xFFFFUL;
-        private const ulong ColumnMask = 0x000F000F000F000FUL;
+        private static readonly string[] HexLookup = new[]
+        {
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "A", "B", "C", "D", "E", "F"
+        };
         private static readonly IMoveExecutor MoveExecutor = new MoveExecutor();
 
         public static ushort[] GetColumns(this ulong grid)
@@ -130,7 +134,10 @@ namespace Sharp48.Solvers.Extensions
             var strings = game.Grid.Squares.Select(x =>
             {
                 var value = x.Tile?.Value ?? 0;
-                return value == 0 ? "0" : (Math.Log(value)/Math.Log(2)).ToString("N0", CultureInfo.InvariantCulture);
+                if (value == 0)
+                    return "0";
+                var number = (int) (Math.Log(value)/Math.Log(2));
+                return HexLookup[number];
             });
             var aggregate = strings.Aggregate((current, next) => current + next);
             return ulong.Parse(aggregate, NumberStyles.AllowHexSpecifier);

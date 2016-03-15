@@ -16,13 +16,13 @@ namespace Sharp48.ConsoleApp
         {
             var solver =
                 new IntelligentSolver(
-                    new ExpectimaxEvaluator(new CachingEvaluator(new SumEvaluator(new List<IEvaluator>()
+                    new AlphaBetaEvaluator(new CachingEvaluator(new SumEvaluator(new List<IEvaluator>()
                     {
-                        new TransformEvaluator(new TileSumEvaluator(3.5), (score) => 20000 - 11*score),
+                        new TransformEvaluator(new TileSumEvaluator(3.5), (score) => 200000 - 11*score),
                         new TransformEvaluator(new EmptyTileEvaluator(), (score) => 270*score),
                         new TransformEvaluator(new MergeEvaluator(), (score) => 700*score),
-                        new TransformEvaluator(new MonotonicityEvaluator(4), (score) => -47*score)
-                    })), 3, 0.0001));
+                        new TransformEvaluator(new MonotonicityEvaluator(4), (score) => 47*score)
+                    })), 3));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
             var logger = new ConsoleLogger();
             using (var runner = new GameRunner(ui, solver, logger))

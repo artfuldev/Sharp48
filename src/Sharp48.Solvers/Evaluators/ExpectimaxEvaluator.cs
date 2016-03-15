@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators
@@ -8,7 +7,6 @@ namespace Sharp48.Solvers.Evaluators
     {
         private readonly byte _depth;
         private readonly IEvaluator _evaluator;
-        private readonly IDictionary<ulong, double> _hashTable = new Dictionary<ulong, double>();
         private readonly double _threshold;
 
         public ExpectimaxEvaluator(IEvaluator evaluator, byte depth, double threshold)
@@ -20,19 +18,12 @@ namespace Sharp48.Solvers.Evaluators
 
         public double Evaluate(ulong grid) => ExpectiMaxScore(grid, _depth, true, 1);
 
-        private double EvaluateInternal(ulong grid)
-        {
-            if (!_hashTable.ContainsKey(grid))
-                _hashTable[grid] = _evaluator.Evaluate(grid);
-            return _hashTable[grid];
-        }
-
         private double ExpectiMaxScore(ulong grid, byte depth, bool randomEvent, double cumulativeProbability)
         {
-            if (grid.NoMovesLeft() || depth == 0 || cumulativeProbability < _threshold)
-                return EvaluateInternal(grid);
-            if (_hashTable.ContainsKey(grid))
-                return _hashTable[grid];
+            if (grid.NoMovesLeft())
+                return double.NegativeInfinity;
+            if (depth == 0 || cumulativeProbability < _threshold)
+                return _evaluator.Evaluate(grid);
             double alpha;
             // Random event at node
             if (randomEvent)
