@@ -122,7 +122,7 @@ namespace Sharp48.Solvers.Extensions
 
         public static ulong MakeMove(this ulong grid, Move move)
         {
-            return 0ul;
+            return MoveExecutor.MakeMove(grid, move);
         }
 
         public static ulong AsGrid(this IGame game)

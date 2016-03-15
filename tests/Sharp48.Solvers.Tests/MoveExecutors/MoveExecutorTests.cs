@@ -50,5 +50,49 @@ namespace Sharp48.Solvers.Tests.MoveExecutors
             // Assert
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData(0x1120211589661006ul, 0x1225291780601000ul)]
+        public void MoveUpWorks(ulong grid, ulong expected)
+        {
+            // Act
+            var actual = _executor.MakeMove(grid, Move.Up);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(0x1120211589661006ul, 0x0022022508970016ul)]
+        public void MoveRightWorks(ulong grid, ulong expected)
+        {
+            // Act
+            var actual = _executor.MakeMove(grid, Move.Right);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(0x1120211589661006ul, 0x1000202082151967ul)]
+        public void MoveDownWorks(ulong grid, ulong expected)
+        {
+            // Act
+            var actual = _executor.MakeMove(grid, Move.Down);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(0x1120211589661006ul, 0x2200225089701600ul)]
+        public void MoveLeftWorks(ulong grid, ulong expected)
+        {
+            // Act
+            var actual = _executor.MakeMove(grid, Move.Left);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
