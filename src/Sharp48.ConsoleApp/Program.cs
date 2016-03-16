@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using Sharp48.ConsoleApp.Logging;
 using Sharp48.Solvers;
 using Sharp48.Solvers.Evaluators;
 using Sharp48.Solvers.Evaluators.RowEvaluation;
@@ -24,8 +22,7 @@ namespace Sharp48.ConsoleApp
                         new TransformEvaluator(new MonotonicityEvaluator(4), (score) => 47*score)
                     })), 3));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
-            var logger = new ConsoleLogger();
-            using (var runner = new GameRunner(ui, solver, logger))
+            using (var runner = new GameRunner(ui, solver))
                 runner.Run();
         }
     }
