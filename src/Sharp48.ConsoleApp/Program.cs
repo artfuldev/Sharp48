@@ -19,7 +19,7 @@ namespace Sharp48.ConsoleApp
                         //new TransformEvaluator(new TileSumEvaluator(5), (score) => score),
                         new TransformEvaluator(new EmptyTileEvaluator(), (score) => Math.Pow(score, 15)),
                         new TransformEvaluator(new MergeEvaluator(), (score) => score),
-                        new TransformEvaluator(new MonotonicityEvaluator(14), (score) => score)
+                        new TransformEvaluator(new MonotonicityEvaluator(15), (score) => score)
                     }), 4, 0.01));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
             using (var runner = new GameRunner(ui, solver))
