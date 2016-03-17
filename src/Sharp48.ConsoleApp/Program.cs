@@ -14,13 +14,13 @@ namespace Sharp48.ConsoleApp
         {
             var solver =
                 new IntelligentSolver(
-                    new AlphaBetaEvaluator(new CachingEvaluator(new SumEvaluator(new List<IEvaluator>()
+                    new ExpectimaxEvaluator(new SumEvaluator(new List<IEvaluator>()
                     {
-                        new TransformEvaluator(new TileSumEvaluator(3.5), (score) => 200000 - 11*score),
-                        new TransformEvaluator(new EmptyTileEvaluator(), (score) => 270*score),
-                        new TransformEvaluator(new MergeEvaluator(), (score) => 700*score),
-                        new TransformEvaluator(new MonotonicityEvaluator(4), (score) => 47*score)
-                    })), 3));
+                        //new TransformEvaluator(new TileSumEvaluator(5), (score) => score),
+                        new TransformEvaluator(new EmptyTileEvaluator(), (score) => Math.Pow(score, 15)),
+                        new TransformEvaluator(new MergeEvaluator(), (score) => score),
+                        new TransformEvaluator(new MonotonicityEvaluator(14), (score) => score)
+                    }), 4, 0.01));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
             using (var runner = new GameRunner(ui, solver))
                 runner.Run();
