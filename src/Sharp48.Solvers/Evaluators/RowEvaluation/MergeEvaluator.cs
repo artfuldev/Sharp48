@@ -17,14 +17,14 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
                     counter++;
                 else if (counter > 0)
                 {
-                    merges += Math.Pow(1 + counter, tile);
+                    merges += Math.Pow(tile, 1 + counter);
                     counter = 0;
                 }
                 prev = tile;
             }
             if (counter > 0)
             {
-                merges += Math.Pow(1 + counter, tiles.Last());
+                merges += Math.Pow(tiles.Last(), 1 + counter);
             }
             return merges;
         }

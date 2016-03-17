@@ -29,7 +29,7 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
                 monotonicityLeft = false;
                 break;
             }
-            return monotonicityLeft || monotonicityRight ? Math.Pow(largest, _factor) : 0;
+            return monotonicityLeft || monotonicityRight ? Math.Pow(_factor, largest) : 0;
         }
     }
 }

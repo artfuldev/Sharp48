@@ -12,6 +12,6 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
             _factor = factor;
         }
 
-        protected override double EvaluateImplementation(byte[] tiles) => tiles.Sum(tile => Math.Pow(tile, _factor));
+        protected override double EvaluateImplementation(byte[] tiles) => tiles.Sum(tile => Math.Pow(_factor, tile));
     }
 }

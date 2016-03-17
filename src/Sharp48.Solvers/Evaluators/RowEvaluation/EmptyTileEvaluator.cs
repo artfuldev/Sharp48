@@ -7,6 +7,6 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
     {
 
         protected override double EvaluateImplementation(byte[] tiles)
-            => Math.Pow(tiles.Count(x => x == 0), tiles.Max());
+            => Math.Pow(tiles.Max(), tiles.Count(x => x == 0));
     }
 }

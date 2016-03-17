@@ -20,9 +20,9 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
                 if (tile == 0)
                     continue;
                 if (i < 3)
-                    score -= Math.Pow(Math.Abs(tile - tiles[i + 1]), _factor);
+                    score -= Math.Pow(_factor, Math.Abs(tile - tiles[i + 1]));
                 if (i > 0)
-                    score -= Math.Pow(Math.Abs(tile - tiles[i - 1]), _factor);
+                    score -= Math.Pow(_factor, Math.Abs(tile - tiles[i - 1]));
             }
             return score;
         }
