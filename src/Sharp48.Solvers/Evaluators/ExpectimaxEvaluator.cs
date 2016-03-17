@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Linq;
 using Sharp48.Solvers.Extensions;
 
@@ -7,7 +8,9 @@ namespace Sharp48.Solvers.Evaluators
     public class ExpectimaxEvaluator : IEvaluator
     {
         private readonly IEvaluator _evaluator;
-        private readonly double _threshold = 0.001;
+        private readonly double _threshold = 0.0001;
+        private readonly ConcurrentDictionary<ulong, double> _heuristics = new ConcurrentDictionary<ulong, double>();
+        private readonly int _maxEntries = 2048;
 
         public ExpectimaxEvaluator(IEvaluator evaluator)
         {
@@ -15,14 +18,16 @@ namespace Sharp48.Solvers.Evaluators
         }
 
         public double Evaluate(ulong grid)
-            => ExpectiMaxScore(grid, (byte) Math.Max(grid.EmptySquaresCount() - 2, 3), true, 1);
+            => ExpectiMaxScore(grid, 3, true, 1);
 
         private double ExpectiMaxScore(ulong grid, byte depth, bool randomEvent, double cumulativeProbability)
         {
             if (grid.NoMovesLeft())
                 return double.NegativeInfinity;
             if (depth == 0 || cumulativeProbability < _threshold)
-                return _evaluator.Evaluate(grid);
+                return _heuristics.ContainsKey(grid)
+                    ? _heuristics[grid]
+                    : (_heuristics[grid] = _evaluator.Evaluate(grid));
             double alpha;
             // Random event at node
             if (randomEvent)
