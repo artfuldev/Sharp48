@@ -1,22 +1,21 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators
 {
     public class ExpectimaxEvaluator : IEvaluator
     {
-        private readonly byte _depth;
         private readonly IEvaluator _evaluator;
-        private readonly double _threshold;
+        private readonly double _threshold = 0.001;
 
-        public ExpectimaxEvaluator(IEvaluator evaluator, byte depth, double threshold)
+        public ExpectimaxEvaluator(IEvaluator evaluator)
         {
             _evaluator = evaluator;
-            _depth = depth;
-            _threshold = threshold;
         }
 
-        public double Evaluate(ulong grid) => ExpectiMaxScore(grid, _depth, true, 1);
+        public double Evaluate(ulong grid)
+            => ExpectiMaxScore(grid, (byte) Math.Max(grid.EmptySquaresCount() - 2, 3), true, 1);
 
         private double ExpectiMaxScore(ulong grid, byte depth, bool randomEvent, double cumulativeProbability)
         {
