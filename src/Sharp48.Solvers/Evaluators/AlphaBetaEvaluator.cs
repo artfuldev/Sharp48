@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq;
-using Sharp48.Solvers.Extensions;
+using Sharp48.Core;
 
 namespace Sharp48.Solvers.Evaluators
 {
@@ -15,19 +14,19 @@ namespace Sharp48.Solvers.Evaluators
             _depth = depth;
         }
 
-        public double Evaluate(ulong grid) => AlphaBetaScore(grid, _depth, double.NegativeInfinity, double.PositiveInfinity, false);
+        public double Evaluate(IGame game) => AlphaBetaScore(game, _depth, double.NegativeInfinity, double.PositiveInfinity, false);
 
-        private double AlphaBetaScore(ulong grid, byte depth, double alpha, double beta, bool maximizingPlayer)
+        private double AlphaBetaScore(IGame game, byte depth, double alpha, double beta, bool maximizingPlayer)
         {
-            if (grid.NoMovesLeft())
+            if (game.Over)
                 return double.NegativeInfinity;
             if (depth == 0)
-                return _evaluator.Evaluate(grid);
+                return _evaluator.Evaluate(game);
             double score;
             if (maximizingPlayer)
             {
                 score = double.NegativeInfinity;
-                foreach (var result in grid.GetPossibleMoves().Select(x=>grid.MakeMove(x)))
+                foreach (var result in game.GetPossibleMoves().Select(x=>game.MakeMove(x)))
                 {
                     score = Math.Max(score, AlphaBetaScore(result, (byte) (depth - 1), alpha, beta, false));
                     alpha = Math.Max(alpha, score);
@@ -37,7 +36,7 @@ namespace Sharp48.Solvers.Evaluators
                 return score;
             }
             score = double.PositiveInfinity;
-            foreach (var result in grid.GetPossible2Generations().Concat(grid.GetPossible4Generations()))
+            foreach (var result in game.GetPossible2Generations().Concat(game.GetPossible4Generations()))
             {
                 score = Math.Min(score, AlphaBetaScore(result, (byte) (depth - 1), alpha, beta, true));
                 beta = Math.Min(beta, score);

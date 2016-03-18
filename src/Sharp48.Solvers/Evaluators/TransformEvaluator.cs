@@ -1,4 +1,5 @@
 ﻿using System;
+using Sharp48.Core;
 
 namespace Sharp48.Solvers.Evaluators
 {
@@ -13,6 +14,6 @@ namespace Sharp48.Solvers.Evaluators
             _transformFunc = transformFunc;
         }
 
-        public double Evaluate(ulong grid) => _transformFunc(_evaluator.Evaluate(grid));
+        public double Evaluate(IGame game) => _transformFunc(_evaluator.Evaluate(game));
     }
 }

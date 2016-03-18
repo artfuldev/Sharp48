@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Sharp48.Core;
 
 namespace Sharp48.Solvers.Evaluators
 {
@@ -12,7 +13,7 @@ namespace Sharp48.Solvers.Evaluators
             _evaluators = evaluators;
         }
 
-        public double Evaluate(ulong grid)
-            => _evaluators.Aggregate(0D, (current, next) => current + next.Evaluate(grid));
+        public double Evaluate(IGame game)
+            => _evaluators.Aggregate(0D, (current, next) => current + next.Evaluate(game));
     }
 }
