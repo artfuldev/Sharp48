@@ -2,6 +2,6 @@
 {
     public interface IRowEvaluator : IEvaluator
     {
-        double Evaluate(byte[] tiles);
+        double Evaluate(uint[] tiles);
     }
 }

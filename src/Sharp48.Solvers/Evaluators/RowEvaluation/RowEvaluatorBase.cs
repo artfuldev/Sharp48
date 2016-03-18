@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Facet.Combinatorics;
+using Sharp48.Core;
 using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators.RowEvaluation
@@ -9,26 +11,26 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
     {
         private readonly IDictionary<string, double> _hashTable = new Dictionary<string, double>();
 
-        public double Evaluate(ulong grid)
+        public double Evaluate(IGame game)
             =>
-                grid.GetColumns()
-                    .Aggregate(grid.GetRows().Aggregate(0d, (current, next) => current + Evaluate(next.AsTiles())),
-                        (current, next) => current + Evaluate(next.AsTiles()));
+                game.Grid.Columns
+                    .Aggregate(game.Grid.Rows.Aggregate(0d, (current, next) => current + Evaluate(next)),
+                        (current, next) => current + Evaluate(next));
 
         protected RowEvaluatorBase()
         {
-            var values = Enumerable.Range(0, 15).Select(x => (byte) x).ToArray();
+            var values = Enumerable.Range(0, 15).Select(x => (uint) Math.Pow(2,x)).ToArray();
             var rows = new Variations<byte>(values, 4, GenerateOption.WithRepetition);
             foreach (var row in rows)
                 Evaluate(row.ToArray());
         }
 
-        public double Evaluate(byte[] tiles)
+        public double Evaluate(uint[] tiles)
         {
             var key = string.Join(",", tiles);
             return _hashTable.ContainsKey(key) ? _hashTable[key] : (_hashTable[key] = EvaluateImplementation(tiles));
         }
 
-        protected abstract double EvaluateImplementation(byte[] tiles);
+        protected abstract double EvaluateImplementation(uint[] tiles);
     }
 }

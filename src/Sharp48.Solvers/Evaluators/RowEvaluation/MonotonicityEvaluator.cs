@@ -1,18 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
     public class MonotonicityEvaluator : RowEvaluatorBase
     {
-        private readonly double _factor;
-
-        public MonotonicityEvaluator(double factor)
-        {
-            _factor = factor;
-        }
-
-        protected override double EvaluateImplementation(byte[] tiles)
+        protected override double EvaluateImplementation(uint[] tiles)
         {
             var monotonicityLeft = true;
             var monotonicityRight = true;
@@ -29,7 +21,7 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
                 monotonicityLeft = false;
                 break;
             }
-            return monotonicityLeft || monotonicityRight ? Math.Pow(_factor, largest) : 0;
+            return monotonicityLeft || monotonicityRight ? largest : 0;
         }
     }
 }
