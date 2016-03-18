@@ -1,7 +1,9 @@
-﻿namespace Sharp48.Solvers.Evaluators
+﻿using Sharp48.Core;
+
+namespace Sharp48.Solvers.Evaluators
 {
     public interface IEvaluator
     {
-        double Evaluate(ulong grid);
+        double Evaluate(IGame game);
     }
 }

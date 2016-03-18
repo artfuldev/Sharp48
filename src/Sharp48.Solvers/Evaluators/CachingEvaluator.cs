@@ -1,22 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
+using Sharp48.Core;
 
 namespace Sharp48.Solvers.Evaluators
 {
     public class CachingEvaluator : IEvaluator
     {
         private readonly IEvaluator _evaluator;
-        private readonly IDictionary<ulong, double> _hashTable = new Dictionary<ulong, double>();
+        private readonly IDictionary<string, double> _hashTable = new ConcurrentDictionary<string, double>();
 
         public CachingEvaluator(IEvaluator evaluator)
         {
             _evaluator = evaluator;
         }
 
-        public double Evaluate(ulong grid)
+        public double Evaluate(IGame game)
         {
-            if (!_hashTable.ContainsKey(grid))
-                _hashTable[grid] = _evaluator.Evaluate(grid);
-            return _hashTable[grid];
+            var key = game.Grid.ToString();
+            if (!_hashTable.ContainsKey(key))
+                _hashTable[key] = _evaluator.Evaluate(game);
+            return _hashTable[key];
         }
     }
 }
