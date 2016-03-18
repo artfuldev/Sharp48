@@ -1,7 +1,7 @@
-﻿using Sharp48.Core.Moves;
+﻿using System.Linq;
+using Sharp48.Core.Moves;
 using Sharp48.Core.PlayArea;
 using Sharp48.Solvers.Extensions;
-using System.Linq;
 using Xunit;
 
 namespace Sharp48.Solvers.Tests.Extensions

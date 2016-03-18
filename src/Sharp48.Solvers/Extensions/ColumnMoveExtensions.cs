@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sharp48.Core.Moves;
 using Sharp48.Core.PlayArea;
-using System.Linq;
 
 namespace Sharp48.Solvers.Extensions
 {

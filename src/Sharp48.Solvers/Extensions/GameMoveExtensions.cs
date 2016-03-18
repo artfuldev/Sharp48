@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sharp48.Core;
 using Sharp48.Core.Moves;
-using System.Linq;
 
 namespace Sharp48.Solvers.Extensions
 {

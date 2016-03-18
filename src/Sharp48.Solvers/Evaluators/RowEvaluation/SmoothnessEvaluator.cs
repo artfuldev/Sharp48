@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sharp48.Solvers.Evaluators.RowEvaluation
+﻿namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
     public class SmoothnessEvaluator : RowEvaluatorBase
     {

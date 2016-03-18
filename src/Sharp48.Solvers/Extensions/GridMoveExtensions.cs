@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sharp48.Core.Moves;
 using Sharp48.Core.PlayArea;
-using System.Linq;
 
 namespace Sharp48.Solvers.Extensions
 {
@@ -22,7 +22,7 @@ namespace Sharp48.Solvers.Extensions
         public static IEnumerable<IGrid> GetPossibleNGenerations(this IGrid grid, uint n)
         {
             var gridString = grid.ToString();
-            var squares = gridString.Split(new[] { Environment.NewLine, "," }, StringSplitOptions.None);
+            var squares = gridString.Split(new[] {Environment.NewLine, ","}, StringSplitOptions.None);
             for (var i = 0; i < 16; i++)
                 if (string.IsNullOrWhiteSpace(squares[i]))
                 {
@@ -70,7 +70,7 @@ namespace Sharp48.Solvers.Extensions
             var newSquares = new ISquare[16];
             for (var i = 0; i < 4; i++)
                 for (var j = 0; j < 4; j++)
-                    newSquares[i * 4 + j] = squares[i][j];
+                    newSquares[i*4 + j] = squares[i][j];
             var gridString = string.Join(",", newSquares.ToList());
             return Grid.Parse(gridString);
         }

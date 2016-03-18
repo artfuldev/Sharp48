@@ -19,7 +19,8 @@ namespace Sharp48.Solvers
         public Move GetBestMove(IGame game)
         {
             var possibleMoves = game.GetPossibleMoves().ToArray();
-            var movesToScoreDictionary = possibleMoves.AsParallel().ToDictionary(x => x, x => _evaluator.Evaluate(game.MakeMove(x)));
+            var movesToScoreDictionary = possibleMoves.AsParallel()
+                .ToDictionary(x => x, x => _evaluator.Evaluate(game.MakeMove(x)));
             var bestScore = movesToScoreDictionary.Max(x => x.Value);
             return double.IsNegativeInfinity(bestScore)
                 ? possibleMoves.First()

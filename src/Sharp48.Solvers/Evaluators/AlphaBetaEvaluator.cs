@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Sharp48.Core;
 using Sharp48.Solvers.Extensions;
-using System.Linq;
 
 namespace Sharp48.Solvers.Evaluators
 {
@@ -16,7 +16,8 @@ namespace Sharp48.Solvers.Evaluators
             _depth = depth;
         }
 
-        public double Evaluate(IGame game) => AlphaBetaScore(game, _depth, double.NegativeInfinity, double.PositiveInfinity, false);
+        public double Evaluate(IGame game)
+            => AlphaBetaScore(game, _depth, double.NegativeInfinity, double.PositiveInfinity, false);
 
         private double AlphaBetaScore(IGame game, byte depth, double alpha, double beta, bool maximizingPlayer)
         {

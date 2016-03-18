@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sharp48.Core.PlayArea;
 using Sharp48.Core.Tiles;
-using System.Linq;
 
 namespace Sharp48.Solvers.Extensions
 {
@@ -46,7 +46,7 @@ namespace Sharp48.Solvers.Extensions
                 source[i] = numberToTheLeft;
                 source[leftIndex] = 0;
             }
-            return source.Select(x => new Square { Tile = x == 0 ? null : new Tile { Value = x } });
+            return source.Select(x => new Square {Tile = x == 0 ? null : new Tile {Value = x}});
         }
 
         public static IEnumerable<ISquare> MergeRight(this IEnumerable<ISquare> squares, out uint score)
@@ -61,11 +61,11 @@ namespace Sharp48.Solvers.Extensions
                 var numberToTheLeft = source[i - 1];
                 if (numberToTheLeft != number)
                     continue;
-                source[i] = 2 * number;
+                source[i] = 2*number;
                 source[i - 1] = 0;
                 score += source[i];
             }
-            return source.Select(x => new Square { Tile = x == 0 ? null : new Tile { Value = x } });
+            return source.Select(x => new Square {Tile = x == 0 ? null : new Tile {Value = x}});
         }
 
         public static IEnumerable<ISquare> MoveRight(this IEnumerable<ISquare> squares, out uint score)
