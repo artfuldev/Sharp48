@@ -1,4 +1,5 @@
-﻿using Sharp48.Core;
+﻿using System;
+using Sharp48.Core;
 using Sharp48.Solvers.Extensions;
 using System.Linq;
 
@@ -8,15 +9,13 @@ namespace Sharp48.Solvers.Evaluators
     {
         private readonly IEvaluator _evaluator;
         private readonly double _threshold = 0.0001;
-        private readonly int _maxEntries = 2048;
 
         public ExpectimaxEvaluator(IEvaluator evaluator)
         {
             _evaluator = evaluator;
         }
 
-        public double Evaluate(IGame game)
-            => ExpectiMaxScore(game, 3, true, 1);
+        public double Evaluate(IGame game) => ExpectiMaxScore(game, 3, true, 1);
 
         private double ExpectiMaxScore(IGame game, byte depth, bool randomEvent, double cumulativeProbability)
         {
