@@ -1,5 +1,7 @@
 ﻿using System;
 using Sharp48.Core;
+using Sharp48.Solvers.Extensions;
+using System.Linq;
 
 namespace Sharp48.Solvers.Evaluators
 {
@@ -26,7 +28,7 @@ namespace Sharp48.Solvers.Evaluators
             if (maximizingPlayer)
             {
                 score = double.NegativeInfinity;
-                foreach (var result in game.GetPossibleMoves().Select(x=>game.MakeMove(x)))
+                foreach (var result in game.GetPossibleMoves().Select(game.MakeMove))
                 {
                     score = Math.Max(score, AlphaBetaScore(result, (byte) (depth - 1), alpha, beta, false));
                     alpha = Math.Max(alpha, score);

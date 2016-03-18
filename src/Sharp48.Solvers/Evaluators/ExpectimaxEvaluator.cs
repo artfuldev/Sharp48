@@ -1,4 +1,6 @@
 ﻿using Sharp48.Core;
+using Sharp48.Solvers.Extensions;
+using System.Linq;
 
 namespace Sharp48.Solvers.Evaluators
 {
@@ -26,7 +28,7 @@ namespace Sharp48.Solvers.Evaluators
             // Random event at node
             if (randomEvent)
             {
-                var emptySquaresCount = game.EmptySquaresCount();
+                var emptySquaresCount = game.Grid.Squares.Count(x => x.GetSafeTileValue() == 0);
                 cumulativeProbability /= emptySquaresCount;
                 var gamesWith2 = game.GetPossible2Generations().ToList();
                 alpha =
@@ -40,7 +42,7 @@ namespace Sharp48.Solvers.Evaluators
             // If we are to play at node
             else
             {
-                var possibleGames = game.GetPossibleMoves().Select(move => game.MakeMove(move));
+                var possibleGames = game.GetPossibleMoves().Select(game.MakeMove);
                 alpha = possibleGames.Max(x => ExpectiMaxScore(x, (byte) (depth - 1), true, cumulativeProbability));
             }
             return alpha;
