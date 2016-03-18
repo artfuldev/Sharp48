@@ -13,14 +13,15 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
 
         public double Evaluate(IGame game)
             =>
-                game.Grid.Columns
-                    .Aggregate(game.Grid.Rows.Aggregate(0d, (current, next) => current + Evaluate(next)),
-                        (current, next) => current + Evaluate(next));
+                game.Grid.Columns.Aggregate(
+                    game.Grid.Rows.Aggregate(0d,
+                        (current, next) => current + Evaluate(next.Select(x => x.GetSafeTileValue()).ToArray())),
+                    (current, next) => current + Evaluate(next.Select(x => x.GetSafeTileValue()).ToArray()));
 
         protected RowEvaluatorBase()
         {
             var values = Enumerable.Range(0, 15).Select(x => (uint) Math.Pow(2,x)).ToArray();
-            var rows = new Variations<byte>(values, 4, GenerateOption.WithRepetition);
+            var rows = new Variations<uint>(values, 4, GenerateOption.WithRepetition);
             foreach (var row in rows)
                 Evaluate(row.ToArray());
         }
