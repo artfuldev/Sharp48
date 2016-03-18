@@ -1,12 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
     public class MergeEvaluator : RowEvaluatorBase
     {
+
         protected override double EvaluateImplementation(byte[] tiles)
         {
-            var merges = 0;
+            var merges = 0d;
             var prev = 0u;
             var counter = 0;
             foreach (var tile in tiles.Where(x => x != 0))
@@ -15,14 +17,14 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
                     counter++;
                 else if (counter > 0)
                 {
-                    merges += 1 + counter;
+                    merges += Math.Pow(tile, 1 + counter);
                     counter = 0;
                 }
                 prev = tile;
             }
             if (counter > 0)
             {
-                merges += 1 + counter;
+                merges += Math.Pow(tiles.Last(), 1 + counter);
             }
             return merges;
         }

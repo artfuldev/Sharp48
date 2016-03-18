@@ -1,29 +1,33 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Linq;
 using Sharp48.Solvers.Extensions;
 
 namespace Sharp48.Solvers.Evaluators
 {
     public class ExpectimaxEvaluator : IEvaluator
     {
-        private readonly byte _depth;
         private readonly IEvaluator _evaluator;
-        private readonly double _threshold;
+        private readonly double _threshold = 0.0001;
+        private readonly ConcurrentDictionary<ulong, double> _heuristics = new ConcurrentDictionary<ulong, double>();
+        private readonly int _maxEntries = 2048;
 
-        public ExpectimaxEvaluator(IEvaluator evaluator, byte depth, double threshold)
+        public ExpectimaxEvaluator(IEvaluator evaluator)
         {
             _evaluator = evaluator;
-            _depth = depth;
-            _threshold = threshold;
         }
 
-        public double Evaluate(ulong grid) => ExpectiMaxScore(grid, _depth, true, 1);
+        public double Evaluate(ulong grid)
+            => ExpectiMaxScore(grid, 3, true, 1);
 
         private double ExpectiMaxScore(ulong grid, byte depth, bool randomEvent, double cumulativeProbability)
         {
             if (grid.NoMovesLeft())
                 return double.NegativeInfinity;
             if (depth == 0 || cumulativeProbability < _threshold)
-                return _evaluator.Evaluate(grid);
+                return _heuristics.ContainsKey(grid)
+                    ? _heuristics[grid]
+                    : (_heuristics[grid] = _evaluator.Evaluate(grid));
             double alpha;
             // Random event at node
             if (randomEvent)

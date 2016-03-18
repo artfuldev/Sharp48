@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
@@ -13,16 +14,22 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
 
         protected override double EvaluateImplementation(byte[] tiles)
         {
-            var monotonicityLeft = 0d;
-            var monotonicityRight = 0d;
+            var monotonicityLeft = true;
+            var monotonicityRight = true;
+            var largest = tiles.Max();
             for (var i = 1; i < 4; ++i)
             {
-                if (tiles[i - 1] > tiles[i])
-                    monotonicityLeft += Math.Pow(tiles[i - 1], _factor) - Math.Pow(tiles[i], _factor);
-                else
-                    monotonicityRight += Math.Pow(tiles[i], _factor) - Math.Pow(tiles[i - 1], _factor);
+                if (tiles[i - 1] <= tiles[i] && tiles[i - 1] != 0) continue;
+                monotonicityRight = false;
+                break;
             }
-            return Math.Min(monotonicityLeft, monotonicityRight);
+            for (var i = 1; i < 4; ++i)
+            {
+                if (tiles[i - 1] >= tiles[i] && tiles[i] != 0) continue;
+                monotonicityLeft = false;
+                break;
+            }
+            return monotonicityLeft || monotonicityRight ? Math.Pow(_factor, largest) : 0;
         }
     }
 }

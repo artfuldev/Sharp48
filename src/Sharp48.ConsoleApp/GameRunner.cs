@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Sharp48.ConsoleApp.Logging;
 using Sharp48.Solvers;
 using Sharp48.UserInterfaces;
 
