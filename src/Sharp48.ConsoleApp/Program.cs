@@ -16,7 +16,9 @@ namespace Sharp48.ConsoleApp
                 new IntelligentSolver(
                     new ExpectimaxEvaluator(new CachingEvaluator(new SumEvaluator(new List<IEvaluator>
                     {
-                        new TransformEvaluator(new EmptyTileEvaluator(), score => Math.Pow(15, score))
+                        new TransformEvaluator(new EmptyTileEvaluator(), score => Math.Pow(32, score)),
+                        //new TransformEvaluator(new SmoothnessEvaluator(), (score) => score),
+                        new TransformEvaluator(new MonotonicityEvaluator(), (score) => score)
                     }))));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
             using (var runner = new GameRunner(ui, solver))

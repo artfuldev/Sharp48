@@ -1,14 +1,9 @@
-﻿namespace Sharp48.Solvers.Evaluators.RowEvaluation
+﻿using System;
+
+namespace Sharp48.Solvers.Evaluators.RowEvaluation
 {
     public class SmoothnessEvaluator : RowEvaluatorBase
     {
-        private readonly double _factor;
-
-        public SmoothnessEvaluator(double factor)
-        {
-            _factor = factor;
-        }
-
         protected override double EvaluateImplementation(uint[] tiles)
         {
             var score = 0d;
@@ -17,10 +12,10 @@
                 var tile = tiles[i];
                 if (tile == 0)
                     continue;
-                if (i < 3)
-                    score -= tile - tiles[i + 1];
-                if (i > 0)
-                    score -= tile - tiles[i - 1];
+                if (i < 3 && tiles[i + 1] != 0)
+                    score -= Math.Abs(tile - tiles[i + 1]);
+                if (i > 0 && tiles[i - 1] != 0)
+                    score -= Math.Abs(tile - tiles[i - 1]);
             }
             return score;
         }
