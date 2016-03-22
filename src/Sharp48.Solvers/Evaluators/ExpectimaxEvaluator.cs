@@ -20,7 +20,7 @@ namespace Sharp48.Solvers.Evaluators
         {
             if (game.Over)
                 return double.NegativeInfinity;
-            if (depth == 0)
+            if (depth == 0 || cumulativeProbability < _threshold)
                 return _evaluator.Evaluate(game);
             double alpha;
             // Random event at node
