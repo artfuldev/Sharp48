@@ -60,7 +60,7 @@ namespace Sharp48.Solvers.Tests.Extensions
             uint score;
 
             // Act
-            var merged = new Row(squares.MergeRight(out score).ToList());
+            var merged = new Row(squares.MergeRight().ToList());
             var actual = merged.ToString();
 
             // Assert
@@ -81,7 +81,7 @@ namespace Sharp48.Solvers.Tests.Extensions
             uint score;
 
             // Act
-            var moved = new Row(squares.MoveRight(out score).ToList());
+            var moved = new Row(squares.MoveRight().ToList());
             var actual = moved.ToString();
 
             // Assert
