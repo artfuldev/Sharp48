@@ -49,9 +49,8 @@ namespace Sharp48.Solvers.Extensions
             return source.Select(x => new Square {Tile = x == 0 ? null : new Tile {Value = x}});
         }
 
-        public static IEnumerable<ISquare> MergeRight(this IEnumerable<ISquare> squares, out uint score)
+        public static IEnumerable<ISquare> MergeRight(this IEnumerable<ISquare> squares)
         {
-            score = 0;
             var source = squares.Select(x => x.GetSafeTileValue()).ToArray();
             for (var i = source.Length - 1; i > 0; i--)
             {
@@ -63,14 +62,13 @@ namespace Sharp48.Solvers.Extensions
                     continue;
                 source[i] = 2*number;
                 source[i - 1] = 0;
-                score += source[i];
             }
             return source.Select(x => new Square {Tile = x == 0 ? null : new Tile {Value = x}});
         }
 
-        public static IEnumerable<ISquare> MoveRight(this IEnumerable<ISquare> squares, out uint score)
+        public static IEnumerable<ISquare> MoveRight(this IEnumerable<ISquare> squares)
         {
-            return squares.SlideRight().MergeRight(out score).SlideRight();
+            return squares.SlideRight().MergeRight().SlideRight();
         }
     }
 }

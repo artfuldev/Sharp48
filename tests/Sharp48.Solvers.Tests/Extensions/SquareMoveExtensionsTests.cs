@@ -68,28 +68,6 @@ namespace Sharp48.Solvers.Tests.Extensions
         }
 
         [Theory]
-        [InlineData("2,,,", 0U)]
-        [InlineData("2,2,,", 4U)]
-        [InlineData("2,,,2", 0U)]
-        [InlineData("2,2,,2", 4U)]
-        [InlineData(",,,2", 0U)]
-        [InlineData(",,4,2", 0U)]
-        [InlineData(",,4,4", 8U)]
-        [InlineData("2,2,4,4", 12U)]
-        public void MergeRightCollectsProperScore(string input, uint expectedScore)
-        {
-            // Arrange
-            var squares = Row.Parse(input);
-            uint score;
-
-            // Act
-            squares.MergeRight(out score);
-
-            // Assert
-            Assert.Equal(expectedScore, score);
-        }
-
-        [Theory]
         [InlineData("2,,,", " , , ,2")]
         [InlineData("2,2,,", " , , ,4")]
         [InlineData("2,,,2", " , , ,4")]
@@ -108,28 +86,6 @@ namespace Sharp48.Solvers.Tests.Extensions
 
             // Assert
             Assert.Equal(expected, actual);
-        }
-
-        [Theory]
-        [InlineData("2,,,", 0U)]
-        [InlineData("2,2,,", 4U)]
-        [InlineData("2,,,2", 4U)]
-        [InlineData("2,2,,2", 4U)]
-        [InlineData(",,,2", 0U)]
-        [InlineData(",,4,2", 0U)]
-        [InlineData(",,4,4", 8U)]
-        [InlineData("2,2,4,4", 12U)]
-        public void MoveRightCollectsProperScore(string input, uint expectedScore)
-        {
-            // Arrange
-            var squares = Row.Parse(input);
-            uint score;
-
-            // Act
-            squares.MoveRight(out score);
-
-            // Assert
-            Assert.Equal(expectedScore, score);
         }
     }
 }
