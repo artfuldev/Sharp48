@@ -14,7 +14,7 @@ namespace Sharp48.Solvers.Evaluators
             _evaluator = evaluator;
         }
 
-        public double Evaluate(IGame game) => ExpectiMaxScore(game, 3, true, 1);
+        public double Evaluate(IGame game) => ExpectiMaxScore(game, 4, true, 1);
 
         private double ExpectiMaxScore(IGame game, byte depth, bool randomEvent, double cumulativeProbability)
         {

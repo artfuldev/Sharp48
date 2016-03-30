@@ -34,21 +34,18 @@ namespace Sharp48.Solvers.Extensions
 
         public static IEnumerable<IGrid> GetPossible4Generations(this IGrid grid) => grid.GetPossibleNGenerations(4);
 
-        public static IGrid MakeMove(this IGrid grid, Move move, out uint score)
+        public static IGrid MakeMove(this IGrid grid, Move move)
         {
             var squares = new ISquare[4][];
             for (var i = 0; i < 4; i++)
                 squares[i] = new ISquare[4];
-            score = 0;
             switch (move)
             {
                 case Move.Up:
                 case Move.Down:
                     for (var i = 0; i < 4; i++)
                     {
-                        uint localScore;
-                        var localSquares = grid.Columns.ElementAt(i).MakeMove(move, out localScore).ToArray();
-                        score += localScore;
+                        var localSquares = grid.Columns.ElementAt(i).MakeMove(move).ToArray();
                         for (var j = 0; j < 4; j++)
                             squares[j][i] = localSquares[j];
                     }
@@ -57,9 +54,7 @@ namespace Sharp48.Solvers.Extensions
                 case Move.Left:
                     for (var i = 0; i < 4; i++)
                     {
-                        uint localScore;
-                        var localSquares = grid.Rows.ElementAt(i).MakeMove(move, out localScore).ToArray();
-                        score += localScore;
+                        var localSquares = grid.Rows.ElementAt(i).MakeMove(move).ToArray();
                         for (var j = 0; j < 4; j++)
                             squares[i][j] = localSquares[j];
                     }

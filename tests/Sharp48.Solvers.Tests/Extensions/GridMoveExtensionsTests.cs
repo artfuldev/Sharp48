@@ -62,20 +62,5 @@ namespace Sharp48.Solvers.Tests.Extensions
             // Assert
             Assert.Equal(expected, actual);
         }
-
-        [Theory]
-        [InlineData("4,16,8,4,32,64,4,2,2,8,2,2,2,4,2, ", Move.Up, 12U)]
-        public void MakeMoveScoresCorrectly(string input, Move move, uint expected)
-        {
-            // Arrange
-            var grid = Grid.Parse(input);
-            uint score;
-
-            // Act
-            grid.MakeMove(move, out score);
-
-            // Assert
-            Assert.Equal(expected, score);
-        }
     }
 }

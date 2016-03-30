@@ -68,28 +68,6 @@ namespace Sharp48.Solvers.Tests.Extensions
         }
 
         [Theory]
-        [InlineData("2,,,", 0U)]
-        [InlineData("2,2,,", 4U)]
-        [InlineData("2,,,2", 4U)]
-        [InlineData("2,2,,2", 4U)]
-        [InlineData(",,,2", 0U)]
-        [InlineData(",,4,2", 0U)]
-        [InlineData(",,4,4", 8U)]
-        [InlineData("2,2,4,4", 12U)]
-        public void MoveDownCollectsProperScore(string input, uint expectedScore)
-        {
-            // Arrange
-            var column = Column.Parse(input);
-            uint score;
-
-            // Act
-            column.MakeMove(Move.Down, out score);
-
-            // Assert
-            Assert.Equal(expectedScore, score);
-        }
-
-        [Theory]
         [InlineData("2,,,", "2, , , ")]
         [InlineData("2,2,,", "4, , , ")]
         [InlineData("2,,,2", "4, , , ")]
@@ -108,28 +86,6 @@ namespace Sharp48.Solvers.Tests.Extensions
 
             // Assert
             Assert.Equal(expected, actual);
-        }
-
-        [Theory]
-        [InlineData("2,,,", 0U)]
-        [InlineData("2,2,,", 4U)]
-        [InlineData("2,,,2", 4U)]
-        [InlineData("2,2,,2", 4U)]
-        [InlineData(",,,2", 0U)]
-        [InlineData(",,4,2", 0U)]
-        [InlineData(",,4,4", 8U)]
-        [InlineData("2,2,4,4", 12U)]
-        public void MoveUpCollectsProperScore(string input, uint expectedScore)
-        {
-            // Arrange
-            var column = Column.Parse(input);
-            uint score;
-
-            // Act
-            column.MakeMove(Move.Up, out score);
-
-            // Assert
-            Assert.Equal(expectedScore, score);
         }
     }
 }
