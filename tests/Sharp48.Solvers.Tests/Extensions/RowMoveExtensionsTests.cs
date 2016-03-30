@@ -60,7 +60,7 @@ namespace Sharp48.Solvers.Tests.Extensions
             uint score;
 
             // Act
-            var moved = row.MakeMove(Move.Right, out score);
+            var moved = row.MakeMove(Move.Right);
             var actual = moved.ToString();
 
             // Assert
@@ -81,7 +81,7 @@ namespace Sharp48.Solvers.Tests.Extensions
             uint score;
 
             // Act
-            var moved = row.MakeMove(Move.Left, out score);
+            var moved = row.MakeMove(Move.Left);
             var actual = moved.ToString();
 
             // Assert
