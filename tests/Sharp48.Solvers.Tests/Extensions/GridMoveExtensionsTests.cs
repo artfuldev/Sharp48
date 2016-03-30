@@ -56,7 +56,7 @@ namespace Sharp48.Solvers.Tests.Extensions
             uint score;
 
             // Act
-            var result = grid.MakeMove(move, out score);
+            var result = grid.MakeMove(move);
             var actual = result.ToString().Replace(Environment.NewLine, ",");
 
             // Assert
