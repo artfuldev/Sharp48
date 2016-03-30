@@ -44,6 +44,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "screens", "screens\", "{ADD
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "37848"
+		SlnRelativePath = "screens\"
 	EndProjectSection
 EndProject
 Global
