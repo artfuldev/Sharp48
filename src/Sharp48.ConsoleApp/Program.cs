@@ -19,9 +19,7 @@ namespace Sharp48.ConsoleApp
                         new EmptyTileEvaluator(),
                         //new MergeEvaluator(),
                         //new MergesAwayEvaluator(),
-                        //new Reaching2048IsAWinEvaluator(),
-                        //new MonotonicityEvaluator(),
-                        new CornerMaxTileEvaluator()
+                        new Reaching2048IsAWinEvaluator(),
                     }))));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
             using (var runner = new GameRunner(ui, solver))
