@@ -16,9 +16,9 @@ namespace Sharp48.ConsoleApp
                 new IntelligentSolver(
                     new ExpectimaxEvaluator(new CachingEvaluator(new SumEvaluator(new List<IEvaluator>
                     {
-                        new EmptyTileEvaluator(),
-                        //new MergeEvaluator(),
-                        //new MergesAwayEvaluator(),
+                        new TransformEvaluator(new EmptyTileEvaluator(), (score) => 2048*score),
+                        new MergeEvaluator(),
+                        new MergesAwayEvaluator(),
                         new Reaching2048IsAWinEvaluator(),
                     }))));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
