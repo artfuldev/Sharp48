@@ -8,13 +8,15 @@ namespace Sharp48.Solvers.Evaluators
     {
         private readonly IEvaluator _evaluator;
         private readonly double _threshold = 0.0001;
+        private readonly byte _depth;
 
-        public ExpectimaxEvaluator(IEvaluator evaluator)
+        public ExpectimaxEvaluator(IEvaluator evaluator, byte depth)
         {
             _evaluator = evaluator;
+            _depth = depth;
         }
 
-        public double Evaluate(IGame game) => ExpectiMaxScore(game, 2, true, 1);
+        public double Evaluate(IGame game) => ExpectiMaxScore(game, _depth, true, 1);
 
         private double ExpectiMaxScore(IGame game, byte depth, bool randomEvent, double cumulativeProbability)
         {
