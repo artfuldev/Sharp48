@@ -12,9 +12,9 @@ namespace Sharp48.Solvers.Evaluators.RowEvaluation
                 var tile = tiles[i];
                 if (tile == 0)
                     continue;
-                if (i < 3 && tiles[i + 1] != 0)
+                if (i < 3)
                     score -= Math.Abs(tile - tiles[i + 1]);
-                if (i > 0 && tiles[i - 1] != 0)
+                if (i > 0)
                     score -= Math.Abs(tile - tiles[i - 1]);
             }
             return score;

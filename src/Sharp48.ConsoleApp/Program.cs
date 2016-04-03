@@ -16,10 +16,10 @@ namespace Sharp48.ConsoleApp
                 new IntelligentSolver(
                     new ExpectimaxEvaluator(new CachingEvaluator(new SumEvaluator(new List<IEvaluator>
                     {
-                        new EmptyTileEvaluator(),
-                        new MergeEvaluator(),
+                        new TransformEvaluator(new EmptyTileEvaluator(), (score) => 2048*score),
+                        new TransformEvaluator(new MergeEvaluator(), (score) => score/2048),
                         new MergesAwayEvaluator(),
-                        new Reaching2048IsAWinEvaluator()
+                        new Reaching2048IsAWinEvaluator(),
                     }))));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
             using (var runner = new GameRunner(ui, solver))
