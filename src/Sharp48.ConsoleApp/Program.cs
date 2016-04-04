@@ -21,8 +21,8 @@ namespace Sharp48.ConsoleApp
                             (score, game) => score*game.Grid.Squares.Max(x => x.Tile?.Value ?? 0)),
                         //new TransformEvaluator(new MergeEvaluator(), (score, game) => score*4),
                         //new TransformEvaluator(new MergesAwayEvaluator(), (score, game) => score*2),
-                        //new Reaching2048IsAWinEvaluator(),
-                    })), 4));
+                        new Reaching2048IsAWinEvaluator(),
+                    }), 200000), 6));
             var ui = new GoogleChromeUI(Path.Combine(Environment.CurrentDirectory));
             using (var runner = new GameRunner(ui, solver))
                 runner.Run();
