@@ -19,7 +19,7 @@ namespace Sharp48.ConsoleApp
                     {
                         new TransformEvaluator(new EmptyTileEvaluator(),
                             (score, game) => score*game.Grid.Squares.Max(x => x.Tile?.Value ?? 0)),
-                        new TransformEvaluator(new MergeEvaluator(), (score, game) => score*4),
+                        new TransformEvaluator(new MergeEvaluator(), (score, game) => score*2048),
                         new TransformEvaluator(new MergesAwayEvaluator(), (score, game) => score*2048),
                         new Reaching2048IsAWinEvaluator()
                     }), 200000), 6));
