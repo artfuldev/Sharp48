@@ -12,6 +12,5 @@ namespace Sharp48.Core
 
         public IGrid Grid { get; }
         public bool Over { get; }
-        public byte LastGeneratedTileValue { get; set; }
     }
 }

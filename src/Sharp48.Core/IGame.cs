@@ -16,10 +16,5 @@ namespace Sharp48.Core
         ///     Describes whether the game is over.
         /// </summary>
         bool Over { get; }
-
-        /// <summary>
-        ///     The last generated tile's value.
-        /// </summary>
-        byte LastGeneratedTileValue { get; }
     }
 }
