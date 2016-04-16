@@ -5,6 +5,10 @@ using Sharp48.UserInterfaces;
 
 namespace Sharp48.ConsoleApp
 {
+    /// <summary>
+    ///     A disposable wrapper that handles running the game. It takes a solver and a UI, queries the UI for the game and the
+    ///     solver for the best moves and plays them on the UI until the game is over.
+    /// </summary>
     public class GameRunner : IDisposable
     {
         private readonly ISolver _solver;
