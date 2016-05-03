@@ -10,6 +10,10 @@
         /// </summary>
         public uint Value { get; set; } = 2;
 
+        /// <summary>
+        /// The string representation of a tile. Allows for easier debugging.
+        /// </summary>
+        /// <returns>The string representation of a tile, with its value.</returns>
         public override string ToString()
         {
             return Value.ToString();
