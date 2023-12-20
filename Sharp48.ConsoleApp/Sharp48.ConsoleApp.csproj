@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sharp48.Core\Sharp48.Core.csproj" />
+    <ProjectReference Include="..\Sharp48.UserInterfaces\Sharp48.UserInterfaces.csproj" />
+    <ProjectReference Include="..\Sharp48.Solvers\Sharp48.Solvers.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+</Project>
